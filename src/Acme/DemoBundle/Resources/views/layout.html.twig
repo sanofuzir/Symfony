@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Sano Fužir</title>
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('bundles/acmedemo/css/demo.css') }}" />
+    </head>
+    <body>
+        <div id="symfony-wrapper">
+            <div id="symfony-header">
+                <a href="{{ path('_welcome') }}">
+                    <img src="{{ asset('bundles/acmedemo/images/logo.gif') }}" alt="Sano logo" />
+                </a>
+                <form id="google-search" method="GET" action="http://google.com/search" target="_blank">
+                    <label for="symfony-search-field"><span>Google search</span></label>
+                    <input name="q" id="symfony-search-field" type="search" placeholder="Google search" class="medium_txt" />
+                    <input type="submit" class="symfony-button-grey" value="OK" />
+                </form>
+            </div>
+            <div id="main_meni">
+                <table>
+                    <tr>
+                        <td><a>Domov</a></td>
+                        <td><a>O meni</a></td>
+                        <td><a>Reference</a></td>
+                        <td><a>Blog</a></td>
+                        <td><a>Forum</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-message">
+                    <em>Notice</em>: {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {% block content_header %}
+                <ul id="menu">
+                    {% block content_header_more %}
+                        <li><a href="{{ path('_demo') }}">Sano Fužir</a></li>
+                    {% endblock %}
+                </ul>
+
+                <div style="clear: both"></div>
+            {% endblock %}
+
+            <div class="symfony-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            {% if code is defined %}
+                <h2>Code behind this page</h2>
+                <div class="symfony-content">{{ code|raw }}</div>
+            {% endif %}
+        </div>
+    </body>
+</html>
