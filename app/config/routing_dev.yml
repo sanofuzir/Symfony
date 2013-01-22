@@ -1,6 +1,22 @@
 _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
+    
+_o_meni:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+    
+_reference:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+    
+_blog:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+    
+_kontakt:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
 
 _demo_secured:
     resource: "@AcmeDemoBundle/Controller/SecuredController.php"

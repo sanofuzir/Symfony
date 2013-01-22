@@ -7,11 +7,18 @@
 {% block content %}
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
-    <h1>Vsebina</h1>
-
-    <p>Dinamična vsebina strani</p>
-
+    <div id="novice">
+        <h2>Novice iz sveta računalništva</h2>
+        <br />
+        <div><p>Novica1</p><p>Novica1</p><p>Novica1</p><p>Novica1</p><p>Novica1</p></div>
+        <div style="float: right"><p>Novica2</p><p>Novica2</p><p>Novica2</p><p>Novica2</p><p>Novica2</p></div>
+    </div>
     
+    <div id="row">
+        <div><p>Anketa</p><p>Anketa</p><p>Anketa</p></div>
+        <div style="float: right"><p>Oglasi</p><p>Oglasi</p><p>Oglasi</p></div>
+    </div>
 
+    <div id="povezave"><p>Povezave</p><p>Povezave</p><p>Povezave</p></div>
     
 {% endblock %}

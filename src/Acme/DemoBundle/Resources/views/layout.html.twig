@@ -12,20 +12,27 @@
                 <a href="{{ path('_welcome') }}">
                     <img src="{{ asset('bundles/acmedemo/images/logo.gif') }}" alt="Sano logo" />
                 </a>
+                
                 <form id="google-search" method="GET" action="http://google.com/search" target="_blank">
                     <label for="symfony-search-field"><span>Google search</span></label>
                     <input name="q" id="symfony-search-field" type="search" placeholder="Google search" class="medium_txt" />
                     <input type="submit" class="symfony-button-grey" value="OK" />
                 </form>
+                 
+                <div style="float: right; padding-top: 70px;">
+                    <a href="{{ path('_demo_login') }}">Login</a>
+                </div>
+                
             </div>
+            
             <div id="main_meni">
                 <table>
                     <tr>
-                        <td><a>Domov</a></td>
-                        <td><a>O meni</a></td>
-                        <td><a>Reference</a></td>
-                        <td><a>Blog</a></td>
-                        <td><a>Forum</a></td>
+                        <td><a href="{{ path('_welcome') }}">Domov</a></td>
+                        <td><a href="{{ path('_o_meni') }}">O meni</a></td>
+                        <td><a href="{{ path('_reference') }}">Reference</a></td>
+                        <td><a href="{{ path('_blog') }}">Blog</a></td>
+                        <td><a href="{{ path('_kontakt') }}">Kontakt</a></td>
                     </tr>
                 </table>
             </div>
@@ -39,7 +46,6 @@
             {% block content_header %}
                 <ul id="menu">
                     {% block content_header_more %}
-                        <li><a href="{{ path('_demo') }}">Sano Fužir</a></li>
                     {% endblock %}
                 </ul>
 
