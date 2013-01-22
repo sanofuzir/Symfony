@@ -1,6 +1,10 @@
 _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
+
+_test:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
     
 _o_meni:
     resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
