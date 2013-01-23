@@ -3,8 +3,6 @@
 namespace Acme\DemoBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Acme\DemoBundle\Entity\Image;
-use Acme\DemoBundle\Entity\User;
 
 /**
  * News
@@ -29,6 +27,13 @@ class News
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="summary", type="text")
+     */
+    private $summary;
 
     /**
      * @var string
@@ -38,21 +43,33 @@ class News
     private $text;
     
     /**
-     * @var User
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="ads")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * @ORM\Column(name="status", type="text")
      */
-    private $user;
+    private $status;
     
     /**
-     * @var Image
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="Image", inversedBy="ads")
-     * @ORM\JoinColumn(name="image", referencedColumnName="id", nullable=false)
+     * @ORM\Column(name="creation_date", type="datetime")
      */
-    private $image;
-
+    private $creation_date;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="editing_date", type="datetime")
+     */
+    private $editing_date;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="publication_date", type="datetime")
+     */
+    private $publication_date;
+    
     /**
      * Get id
      *
@@ -108,48 +125,120 @@ class News
     {
         return $this->text;
     }
-    
+
+
     /**
-     * Set user
+     * Set summary
      *
-     * @param User $user
-     * @return Ad
+     * @param string $summary
+     * @return News
      */
-    public function setUser(User $user)
+    public function setSummary($summary)
     {
-        $this->user = $user;
+        $this->summary = $summary;
+    
         return $this;
     }
 
     /**
-     * Get user
+     * Get summary
      *
-     * @return User 
+     * @return string 
      */
-    public function getUser()
+    public function getSummary()
     {
-        return $this->user;
+        return $this->summary;
     }
-    
+
     /**
-     * Set image
+     * Set status
      *
-     * @param Image $image
-     * @return Ad
+     * @param string $status
+     * @return News
      */
-    public function setImage(Image $image)
+    public function setStatus($status)
     {
-        $this->image = $image;
+        $this->status = $status;
+    
         return $this;
     }
 
     /**
-     * Get image
+     * Get status
      *
-     * @return Image 
+     * @return string 
      */
-    public function getImage()
+    public function getStatus()
     {
-        return $this->image;
+        return $this->status;
+    }
+
+    /**
+     * Set creation_date
+     *
+     * @param \DateTime $creationDate
+     * @return News
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get creation_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creation_date;
+    }
+
+    /**
+     * Set editing_date
+     *
+     * @param \DateTime $editingDate
+     * @return News
+     */
+    public function setEditingDate($editingDate)
+    {
+        $this->editing_date = $editingDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get editing_date
+     *
+     * @return \DateTime 
+     */
+    public function getEditingDate()
+    {
+        return $this->editing_date;
+    }
+
+    /**
+     * Set publication_date
+     *
+     * @param \DateTime $publicationDate
+     * @return News
+     */
+    public function setPublicationDate($publicationDate)
+    {
+        $this->publication_date = $publicationDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get publication_date
+     *
+     * @return \DateTime 
+     */
+    public function getPublicationDate()
+    {
+        return $this->publication_date;
     }
 }
