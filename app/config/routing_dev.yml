@@ -2,7 +2,15 @@ _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
 
-_test:
+_news_add:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+ 
+_news:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+
+_singlenews:
     resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
     type:     annotation
     

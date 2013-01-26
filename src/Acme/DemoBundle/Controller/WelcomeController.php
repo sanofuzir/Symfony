@@ -5,12 +5,15 @@ namespace Acme\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-
+use Acme\DemoBundle\Entity\NewsAdd;
 use Acme\DemoBundle\Entity\User;
+use Acme\DemoBundle\Entity\News;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class WelcomeController extends Controller
 {
+    
     public function indexAction()
     {
         /*
@@ -56,51 +59,96 @@ class WelcomeController extends Controller
     {
         return $this->render('AcmeDemoBundle:Welcome:kontakt.html.twig');
     }
-    
+
     /**
-     * @Route("/test", name="_test")
+     * @Route("/novice/add", name="_news_add")
      * @Template()
      */
-    public function testAction()
+    public function NewsAddAction(Request $request)
     {
-        /*
-        $user = new User();
-        $user->setUsername('Sano');
-        $user->setPassword('password123');
-        $user->setEmail('sano.fuzir@gmail.com');
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($user);
-        $em->flush();
-        return new Response('Created user id '.$user->getId());
-         */
+        $news = new NewsAdd();
         
-        /*
-        $id="1";
-        $user = $this->getDoctrine()
-                        ->getRepository('AcmeDemoBundle:User')
-                        ->find($id);
+        $news->setTitle('Write a title');
+        $news->setSummary('Write a summary');
+        $news->setText('Write a news');
+        $news->setStatus('active, draft');
         
-        return new Response('Created user id je: '.$user->getUsername());
-         
-        // query by the primary key (usually "id")
-        $product = $repository->find($id);
-        // dynamic method names to find based on a column value
-        $product = $repository->findOneById($id);
-        $product = $repository->findOneByName('foo');
-        // find *all* products
-        $products = $repository->findAll();
-        // find a group of products based on an arbitrary column value
-        $products = $repository->findByPrice(19.99);
-         
-        // query for one product matching be name and price
-        $product = $repository->findOneBy(array('name' => 'foo', 'price' => 19.99));
-        // query for all products matching the name, ordered by price
-        $product = $repository->findBy(
-        array('name' => 'foo'),
-        array('price' => 'ASC')
-        ); 
-         
-         */
+        $form = $this->createFormBuilder($news)
+        ->add('Title', 'text')
+        ->add('Summary', 'text')
+        ->add('Text', 'text')
+        ->add('Status', 'text')
+        ->getForm();
+        
+        $request = $this->get('request');
+        if ('POST' == $request->getMethod()) {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+
+                $date = new \DateTime('now');
+               
+                $new_news = new News();
+                $new_news->setTitle($news->getTitle());
+                $new_news->setSummary($news->getSummary());
+                $new_news->setText($news->getText());
+                $new_news->setStatus($news->getStatus());
+                $new_news->setCreationDate($date);
+                $new_news->setEditingDate($date);
+                $new_news->setPublicationDate($date);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($new_news);
+                $em->flush();
+
+                $this->get('session')->setFlash('notice', 'Novica dodana!');
+                }
+
+            }
+            return $this->render('AcmeDemoBundle:Welcome:new.html.twig', array(
+                                        'form' => $form->createView(),
+                                        ));
+        }
+        
+     /**
+     * @Route("/novice", name="_news")
+     * @Template()
+     */
+    public function NewsAction()
+    {
+        $repository = $this->getDoctrine()
+                           ->getRepository('AcmeDemoBundle:News');
+        
+        $news = $repository->findAll();
+        
+        if (!$news) {
+            throw $this->createNotFoundException('No News found!');
+        }
+        
+        return $this->render('AcmeDemoBundle:Welcome:news.html.twig', array(
+                        'news' => $news,
+                      ));
     }
+    
+    /**
+     * @Route("/novice/", name="_singlenews")
+     * @Template()
+     */
+    public function SingleNewsAction(Request $request)
+    {
+        $request = $this->getRequest();
+        $id = $request->query->get('id'); // get a $_GET parameter
+        //$request->request->get('id'); // get a $_POST parameter
+        
+        
+        $repository = $this->getDoctrine()
+                           ->getRepository('AcmeDemoBundle:News');
+        
+        $news = $repository->findOneById($id);
+        
+        return $this->render('AcmeDemoBundle:Welcome:SingleNews.html.twig', array(
+                        'news' => $news,
+                      ));
+    }
+
 }
 
