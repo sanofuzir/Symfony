@@ -1,6 +1,14 @@
 _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
+    
+_admin:
+    pattern:  /admin/
+    defaults: { _controller: AcmeAdminBundle:Default:index }
+    
+_newsAdmin:
+    resource: "@AcmeAdminBundle\Controller\DefaultController.php"
+    type:     annotation
 
 _news_add:
     resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
@@ -53,3 +61,4 @@ _configurator:
 
 _main:
     resource: routing.yml
+
