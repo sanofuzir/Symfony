@@ -7,15 +7,7 @@
 {% block content %}
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
  
-<h1>Arhiv Novic</h1>
-{% for item in news %}
-    <div id="news">
-        <h2>Naslov:</h2>{{ item.getTitle }}
-        <p><h2>Povzetek:</h2><br />{{ item.getSummary }}</p>
-        <h2>Datum objave:</h2>{{ item.getPublicationDate|date('d.m.Y H:i:s') }}<br />
-        <a href="{{ path('_singlenews', ({'id': item.getId})) }}" >Več...</a>
-        
-    </div>
-{% endfor %}
+<h1>Admin Page</h1>
+
     
 {% endblock %}

@@ -1,6 +1,6 @@
 AcmeAdminBundle:
     resource: "@AcmeAdminBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
 
 
 

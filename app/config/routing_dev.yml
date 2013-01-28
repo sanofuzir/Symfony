@@ -7,7 +7,11 @@ _admin:
     defaults: { _controller: AcmeAdminBundle:Default:index }
     
 _newsAdmin:
-    resource: "@AcmeAdminBundle\Controller\DefaultController.php"
+    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
+    type:     annotation
+    
+_deleteNews:
+    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
     type:     annotation
 
 _news_add:
