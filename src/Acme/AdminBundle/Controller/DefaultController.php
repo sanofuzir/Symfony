@@ -130,7 +130,7 @@ class DefaultController extends Controller
         $news = $em->getRepository('AcmeDemoBundle:News')->find($id);   //novica, ki jo želim urejati
         
         $new_news = new NewsAdd();                  //ustvarjanje forme
-        $new_news->setTitle($news->getTitle());
+        $new_news->setTitle($news->getTitle());     //prikaz starih podatkov ki jih lahko urejamo
         $new_news->setSummary($news->getSummary());
         $new_news->setText($news->getText());
         $new_news->setStatus($news->getStatus());
