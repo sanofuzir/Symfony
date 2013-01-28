@@ -59,55 +59,6 @@ class WelcomeController extends Controller
     {
         return $this->render('AcmeDemoBundle:Welcome:kontakt.html.twig');
     }
-
-    /**
-     * @Route("/novice/add", name="_news_add")
-     * @Template()
-     */
-    public function NewsAddAction(Request $request)
-    {
-        $news = new NewsAdd();
-        
-        $news->setTitle('Write a title');
-        $news->setSummary('Write a summary');
-        $news->setText('Write a news');
-        $news->setStatus('active, draft');
-        
-        $form = $this->createFormBuilder($news)
-        ->add('Title', 'text')
-        ->add('Summary', 'text')
-        ->add('Text', 'text')
-        ->add('Status', 'text')
-        ->getForm();
-        
-        $request = $this->get('request');
-        if ('POST' == $request->getMethod()) {
-            $form->bindRequest($request);
-            if ($form->isValid()) {
-
-                $date = new \DateTime('now');
-               
-                $new_news = new News();
-                $new_news->setTitle($news->getTitle());
-                $new_news->setSummary($news->getSummary());
-                $new_news->setText($news->getText());
-                $new_news->setStatus($news->getStatus());
-                $new_news->setCreationDate($date);
-                $new_news->setEditingDate($date);
-                $new_news->setPublicationDate($date);
-
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($new_news);
-                $em->flush();
-
-                $this->get('session')->setFlash('notice', 'Novica dodana!');
-                }
-
-            }
-            return $this->render('AcmeDemoBundle:Welcome:new.html.twig', array(
-                                        'form' => $form->createView(),
-                                        ));
-        }
         
      /**
      * @Route("/novice", name="_news")
