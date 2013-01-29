@@ -10,8 +10,15 @@
     <div id="novice">
         <h2>Novice iz sveta računalništva</h2>
         <br />
-        <div><p>Novica1</p><p>Novica1</p><p>Novica1</p><p>Novica1</p><p>Novica1</p></div>
-        <div style="float: right"><p>Novica2</p><p>Novica2</p><p>Novica2</p><p>Novica2</p><p>Novica2</p></div>
+        <div style="margin-left: -13px; width: 102%; border: none;">
+            {% for item in news %}
+                <div style="margin-left: 14px; float: left; width: 48%;">
+                        <h2>Naslov:</h2>{{ item.getTitle }}
+                        <p><h2>Povzetek:</h2><br />{{ item.getSummary }}</p>
+                        <a href="{{ path('_singlenews', ({'id': item.getId})) }}" >Več...</a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
     
     <div id="row">

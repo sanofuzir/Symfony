@@ -16,12 +16,25 @@ class WelcomeController extends Controller
     
     public function indexAction()
     {
-        /*
-         * The action's view can be rendered using render() method
-         * or @Template annotation as demonstrated in DemoController.
-         *
-         */
-        return $this->render('AcmeDemoBundle:Welcome:index.html.twig');
+        $repository = $this->getDoctrine()
+                           ->getRepository('AcmeDemoBundle:News');
+        
+        $query = $repository->createQueryBuilder('n')
+            ->where('n.status = :status')
+            ->setParameter('status', 'active')
+            ->orderBy('n.publication_date', 'DESC')
+            ->setMaxResults(2)
+            ->getQuery();
+
+        $news = $query->getResult();
+        
+        if (!$news) {
+            throw $this->createNotFoundException('No News found!');
+        }
+        
+        return $this->render('AcmeDemoBundle:Welcome:index.html.twig', array(
+                        'news' => $news,
+                      ));
     }
     
     /**

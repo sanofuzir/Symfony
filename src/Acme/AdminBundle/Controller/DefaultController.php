@@ -85,7 +85,8 @@ class DefaultController extends Controller
         ->add('Title', 'text')
         ->add('Summary', 'text')
         ->add('Text', 'text')
-        ->add('Status', 'text')
+        ->add('Status', 'choice', array(
+                'choices' => array('active' => 'Active', 'draft' => 'Draft')))
         ->getForm();
         
         $request = $this->get('request');
@@ -102,8 +103,11 @@ class DefaultController extends Controller
                 $new_news->setStatus($news->getStatus());
                 $new_news->setCreationDate($date);
                 $new_news->setEditingDate($date);
-                $new_news->setPublicationDate($date);
-
+                if ($new_news->getStatus() == "active") {
+                    $new_news->setPublicationDate($date);
+                }else{
+                    $new_news->setPublicationDate(NULL);
+                }
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($new_news);
                 $em->flush();
@@ -139,7 +143,8 @@ class DefaultController extends Controller
         ->add('Title', 'text')
         ->add('Summary', 'text')
         ->add('Text', 'text')
-        ->add('Status', 'text')
+        ->add('Status', 'choice', array(
+                'choices' => array('active' => 'Active', 'draft' => 'Draft')))
         ->getForm();
   
         $request = $this->get('request');       //preverjanje forme.
@@ -153,7 +158,9 @@ class DefaultController extends Controller
                 $news->setText($new_news->getText());
                 $news->setStatus($new_news->getStatus());
                 $news->setEditingDate($date);
-
+                if ($new_news->getStatus() == "active") {
+                    $news->setPublicationDate($date);
+                }
                 $em = $this->getDoctrine()->getManager();   //update novice
                 $em->flush();
                 

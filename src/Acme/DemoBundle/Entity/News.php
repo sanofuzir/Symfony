@@ -66,7 +66,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="publication_date", type="datetime")
+     * @ORM\Column(name="publication_date", type="datetime", nullable=true)
      */
     private $publication_date;
     
