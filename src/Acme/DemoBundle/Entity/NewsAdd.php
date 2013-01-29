@@ -4,6 +4,7 @@ namespace Acme\DemoBundle\Entity;
 
 class NewsAdd
 {
+    protected $id;
     protected $title;
     protected $summary;
     protected $text;
@@ -12,6 +13,11 @@ class NewsAdd
     protected $editing_date;
     protected $publication_date;
    
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     public function getTitle()
     {
         return $this->title;
