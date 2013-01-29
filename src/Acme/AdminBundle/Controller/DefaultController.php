@@ -126,7 +126,7 @@ class DefaultController extends Controller
         $request = $this->getRequest();
         $id = $request->query->get('id');   //pridobivanje id-ja iz url-ja        
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         
         $repository = $this->getDoctrine()                          
                            ->getRepository('AcmeDemoBundle:News');
