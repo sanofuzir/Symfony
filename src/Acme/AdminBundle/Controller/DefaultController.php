@@ -127,7 +127,15 @@ class DefaultController extends Controller
         $id = $request->query->get('id');   //pridobivanje id-ja iz url-ja        
         
         $em = $this->getDoctrine()->getEntityManager();
-        $news = $em->getRepository('AcmeDemoBundle:News')->find($id);   //novica, ki jo želim urejati
+        
+        $repository = $this->getDoctrine()                          
+                           ->getRepository('AcmeDemoBundle:News');
+        
+        $news = $repository->findOneById($id);          //novica, ki jo želim urejati
+        
+        if (!$news) {
+            throw $this->createNotFoundException('No news found for id: '.$id);  //če ni nobene novice vrže izjemo
+        }
         
         $new_news = new NewsAdd();                  //ustvarjanje forme
         $new_news->setTitle($news->getTitle());     //prikaz starih podatkov ki jih lahko urejamo
@@ -147,17 +155,15 @@ class DefaultController extends Controller
             $form->bindRequest($request);
             if ($form->isValid()) {
                 $date = new \DateTime('now');   //trenutni datum
-               
+
                 $news->setTitle($new_news->getTitle());     //nastavitev novih podatkov
                 $news->setSummary($new_news->getSummary());
                 $news->setText($new_news->getText());
                 $news->setStatus($new_news->getStatus());
                 $news->setEditingDate($date);
 
-                $em = $this->getDoctrine()->getManager();   //update novice
-                $em->persist($news);
-                $em->flush();
-                
+                $em->flush();  //update novice
+
                 $this->get('session')->setFlash('Notice', 'Novica urejena!');   //izpis opozorila
                 }
             }
