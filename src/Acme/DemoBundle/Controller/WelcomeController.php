@@ -113,6 +113,24 @@ class WelcomeController extends Controller
                         'news' => $news,
                       ));
     }
+    
+    /**
+     * @Route("/login", name="_login")
+     * @Template()
+     */
+    public function loginAction()
+    {
+        return $this->render('AcmeDemoBundle:Welcome:login.html.twig');
+    }
+    
+    /**
+     * @Route("/register", name="_register")
+     * @Template()
+     */
+    public function registerAction()
+    {
+        return $this->render('AcmeDemoBundle:Welcome:register.html.twig');
+    }
 
 }
 

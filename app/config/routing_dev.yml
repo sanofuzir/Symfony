@@ -17,7 +17,15 @@ _deleteNews:
 _news_add:
     resource: "@AcmeAdminBundle/Controller/DefaultController.php"
     type:     annotation
- 
+
+_login:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+    
+_register:
+    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+    type:     annotation
+  
 _news:
     resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
     type:     annotation

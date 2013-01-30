@@ -75,7 +75,6 @@ class DefaultController extends Controller
     public function NewsAddAction(Request $request)
     {
         $news = new NewsAdd();
-        
         $news->setTitle('Write a title');
         $news->setSummary('Write a summary');
         $news->setText('Write a news');
@@ -93,9 +92,7 @@ class DefaultController extends Controller
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
-
                 $date = new \DateTime('now');
-               
                 $new_news = new News();
                 $new_news->setTitle($news->getTitle());
                 $new_news->setSummary($news->getSummary());
@@ -114,7 +111,6 @@ class DefaultController extends Controller
 
                 $this->get('session')->setFlash('notice', 'Novica dodana!');
                 }
-
             }
             return $this->render('AcmeAdminBundle:Default:new.html.twig', array(
                                         'form' => $form->createView(),
