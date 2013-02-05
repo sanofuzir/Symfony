@@ -1,67 +1,6 @@
 _welcome:
     pattern:  /
     defaults: { _controller: AcmeDemoBundle:Welcome:index }
-    
-_admin:
-    pattern:  /admin/
-    defaults: { _controller: AcmeAdminBundle:Default:index }
-    
-_newsAdmin:
-    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
-    type:     annotation
-    
-_deleteNews:
-    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
-    type:     annotation
-
-_news_add:
-    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
-    type:     annotation
-
-_login:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-    
-_register:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-  
-_news:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-    
-_edit:
-    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
-    type:     annotation
-    
-_singlenews:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-    
-_o_meni:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-    
-_reference:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-    
-_blog:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-    
-_kontakt:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
-
-_demo_secured:
-    resource: "@AcmeDemoBundle/Controller/SecuredController.php"
-    type:     annotation
-
-_demo:
-    resource: "@AcmeDemoBundle/Controller/DemoController.php"
-    type:     annotation
-    prefix:   /demo
 
 _wdt:
     resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"

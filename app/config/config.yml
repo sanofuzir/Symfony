@@ -58,3 +58,9 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+#Services
+services:
+    acme.news_manager:
+        class:        Acme\DemoBundle\Models\NewsManager
+        arguments:    [NewsManeger]

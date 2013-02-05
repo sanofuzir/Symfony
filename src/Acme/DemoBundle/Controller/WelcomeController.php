@@ -5,7 +5,6 @@ namespace Acme\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Acme\DemoBundle\Entity\NewsAdd;
 use Acme\DemoBundle\Entity\User;
 use Acme\DemoBundle\Entity\News;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,24 +112,5 @@ class WelcomeController extends Controller
                         'news' => $news,
                       ));
     }
-    
-    /**
-     * @Route("/login", name="_login")
-     * @Template()
-     */
-    public function loginAction()
-    {
-        return $this->render('AcmeDemoBundle:Welcome:login.html.twig');
-    }
-    
-    /**
-     * @Route("/register", name="_register")
-     * @Template()
-     */
-    public function registerAction()
-    {
-        return $this->render('AcmeDemoBundle:Welcome:register.html.twig');
-    }
-
 }
 

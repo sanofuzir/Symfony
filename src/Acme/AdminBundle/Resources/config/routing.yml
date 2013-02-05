@@ -1,4 +1,5 @@
 acme_admin_homepage:
-    pattern:  /hello/{name}
+    pattern:  /admin
     defaults: { _controller: AcmeAdminBundle:Default:index }
-
+    type:     annotation
+      
