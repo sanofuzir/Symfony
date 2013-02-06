@@ -9,7 +9,6 @@
  
 <h1>Admin urejanje Novice</h1>
 
-<span style="margin-left: 31px;">Id novice: {{id}}</span>
 <form id="newsAdd" action="{{ path('_edit', ({'id': id})) }}" method="post" {{ form_enctype(form) }}>
 {{ form_widget(form) }}
 <input type="submit" />

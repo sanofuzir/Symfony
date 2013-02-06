@@ -70,7 +70,11 @@ class News
      */
     private $publication_date;
     
-    /**
+    public function __construct() {
+        $this->creation_date = new \DateTime('now');
+    }
+
+        /**
      * Get id
      *
      * @return integer 
@@ -179,9 +183,9 @@ class News
      * @param \DateTime $creationDate
      * @return News
      */
-    public function setCreationDate($creationDate)
+    public function setCreationDate()
     {
-        $this->creation_date = $creationDate;
+        $this->creation_date;
     
         return $this;
     }
@@ -202,9 +206,9 @@ class News
      * @param \DateTime $editingDate
      * @return News
      */
-    public function setEditingDate($editingDate)
+    public function setEditingDate($date)
     {
-        $this->editing_date = $editingDate;
+        $this->editing_date = $date;
     
         return $this;
     }
@@ -225,9 +229,9 @@ class News
      * @param \DateTime $publicationDate
      * @return News
      */
-    public function setPublicationDate($publicationDate)
+    public function setPublicationDate($date)
     {
-        $this->publication_date = $publicationDate;
+        $this->publication_date = $date;
     
         return $this;
     }

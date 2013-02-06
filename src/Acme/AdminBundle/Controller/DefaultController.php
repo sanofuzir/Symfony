@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Acme\DemoBundle\Entity\News;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
-
+use Acme\DemoBundle\Form\NewsForm;
 
 /**
  * @Route("/admin")
@@ -35,27 +35,26 @@ class DefaultController extends Controller
         $news = $this->getNewsManager()->findAll();
         
         if (!$news) {
-            throw $this->createNotFoundException('No News found!');
+            throw new $this->createNotFoundException('No News found!');
         }
         
         return array( 'news' => $news );
     }
 
     /**
-     * @Route("/delete/{id}", name="news_admin_delete", requirements={"id" = "\d{1,4}"})
-     *
-     * 
+     * @Route("/delete/{id}", name="_deleteNews", requirements={"id" = "\d{1,4}"}) 
      */
     public function deleteNewsAdminAction($id)
     {
         
-        $news = $this->getNewsManager()->findNews($id);
+        $SingleNews = $this->getNewsManager()->findNews($id);
 
-        if ($news) {
-            $this->getNewsManager()->delete($news);
+        if ($SingleNews) {
+            $this->getNewsManager()->deleteNews($SingleNews);
             $this->get('session')->setFlash('notice', 'Novica Izbrisana!');
             $this->redirect($this->generateUrl('_newsAdmin'));
         }
+        return $this->redirect($this->generateUrl('_newsAdmin'));
     }
     
     /**
@@ -64,41 +63,34 @@ class DefaultController extends Controller
      */
     public function NewsAddAction(Request $request)
     {
-        $news = new NewsAdd();
+        
+        $news = new News();
         $news->setTitle('Write a title');
         $news->setSummary('Write a summary');
         $news->setText('Write a news');
         $news->setStatus('active, draft');
         
-        $form = $this->createFormBuilder($news)
-        ->add('Title', 'text')
-        ->add('Summary', 'text')
-        ->add('Text', 'text')
-        ->add('Status', 'choice', array(
-                'choices' => array('active' => 'Active', 'draft' => 'Draft')))
-        ->getForm();
+        $form = $this->createForm(new NewsForm(), $news);
         
-        $request = $this->get('request');
         if ('POST' == $request->getMethod()) {
             $form->bindRequest($request);
             if ($form->isValid()) {
-                $date = new \DateTime('now');
+                
                 $new_news = new News();
                 $new_news->setTitle($news->getTitle());
                 $new_news->setSummary($news->getSummary());
                 $new_news->setText($news->getText());
                 $new_news->setStatus($news->getStatus());
-                $new_news->setCreationDate($date);
-                $new_news->setEditingDate($date);
+                $new_news->setCreationDate();
+                $new_news->setEditingDate(new \DateTime('now'));
+                
                 if ($new_news->getStatus() == "active") {
-                    $new_news->setPublicationDate($date);
+                    $new_news->setPublicationDate(new \DateTime('now'));
                 }else{
                     $new_news->setPublicationDate(NULL);
                 }
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($new_news);
-                $em->flush();
-
+                
+                $this->getNewsManager()->saveNews($new_news);
                 $this->get('session')->setFlash('notice', 'Novica dodana!');
                 }
             }
@@ -108,32 +100,32 @@ class DefaultController extends Controller
         }
         
      /**
-     * @Route("/novice/edit/{id}", name="news_edit")
-     * @Route("/novice/add", name="news_add")
+     * @Route("/novice/edit/{id}", name="_edit")
      * @Template()
      */
-    public function EditAction(Request $request, $id = null)
+    public function EditAction(Request $request, $id)
     {
         if ($id) {
-            $entity = $this->getNewsManager()->findNews($id);
-            //if (!$entity)
-                //throw new  createNotFoundException
+            $entity = $this->getNewsManager()->findNews($id);            
         } else {
-            $entity = $this->getNewsManager()->createNews();// new News();
+            $entity = $this->getNewsManager()->createNews();
         }
-
-        $form  = $this->createForm(new NewsType(), $entity);
+        $form  = $this->createForm(new NewsForm(), $entity);
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
+                $entity->setEditingDate(new \DateTime('now'));
+                if ($entity->getStatus() == "active") {
+                    $entity->setPublicationDate(new \DateTime('now'));
+                }
                 $this->getNewsManager()->saveNews($entity);
-                
-                $this->get('session')->setFlash('success', 'News was saved!');
+                $this->get('session')->setFlash('success', 'News was edited!');
                 return $this->redirect($this->generateUrl('_newsAdmin'));
             }
         }
         return array(
-            'form'   => $form->createView(),
+                     'form'   => $form->createView(),
+                     'id'     => $id,
         );  
     } 
 }

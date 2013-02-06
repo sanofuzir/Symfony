@@ -2,7 +2,7 @@
 
 namespace Acme\DemoBundle\Models;
 
-use Acme\DemoBundle\Entity\News;
+use Doctrine\ORM\EntityManager;
 
 class NewsManager {
 
