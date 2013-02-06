@@ -5,13 +5,22 @@ namespace Acme\DemoBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Acme\DemoBundle\Entity\User;
 use Acme\DemoBundle\Entity\News;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Acme\DemoBundle\Form\NewsForm;
 
 class WelcomeController extends Controller
 {
+    private $manager;
+
+    /**
+     * @return NewsManager
+     */
+    private function getNewsManager()
+    {
+        return $this->container->get('acme.news_manager');
+    }
     
     public function indexAction()
     {
@@ -78,39 +87,24 @@ class WelcomeController extends Controller
      */
     public function NewsAction()
     {
-        $repository = $this->getDoctrine()
-                           ->getRepository('AcmeDemoBundle:News');
-        
-        $news = $repository->findAll();
+        $news = $this->getNewsManager()->findAll();
         
         if (!$news) {
-            throw $this->createNotFoundException('No News found!');
+            throw new $this->createNotFoundException('No News found!');
         }
         
-        return $this->render('AcmeDemoBundle:Welcome:news.html.twig', array(
-                        'news' => $news,
-                      ));
+        return array( 'news' => $news );
     }
     
     /**
-     * @Route("/novice/", name="_singlenews")
+     * @Route("/novice/{id}", name="_singlenews", requirements={"id" = "\d{1,4}"})
      * @Template()
      */
-    public function SingleNewsAction(Request $request)
+    public function SingleNewsAction($id)
     {
-        $request = $this->getRequest();
-        $id = $request->query->get('id'); // get a $_GET parameter
-        //$request->request->get('id'); // get a $_POST parameter
+        $SingleNews = $this->getNewsManager()->findNews($id);
         
-        
-        $repository = $this->getDoctrine()
-                           ->getRepository('AcmeDemoBundle:News');
-        
-        $news = $repository->findOneById($id);
-        
-        return $this->render('AcmeDemoBundle:Welcome:SingleNews.html.twig', array(
-                        'news' => $news,
-                      ));
+        return array( 'news' => $SingleNews );
     }
 }
 
