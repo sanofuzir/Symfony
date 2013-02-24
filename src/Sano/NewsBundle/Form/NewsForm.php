@@ -1,10 +1,10 @@
 <?php
 
-namespace Acme\DemoBundle\Form;
+namespace Sano\NewsBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Acme\DemoBundle\Entity\News;
+use sano\NewsBundle\Entity\News;
 
 class NewsForm extends AbstractType
 {

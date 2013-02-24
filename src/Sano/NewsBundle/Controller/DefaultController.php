@@ -5,7 +5,10 @@ namespace Sano\NewsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Sano\NewsBundle\Entity\News;
+use Sano\NewsBundle\Form\NewsForm;
 
 class DefaultController extends Controller
 {

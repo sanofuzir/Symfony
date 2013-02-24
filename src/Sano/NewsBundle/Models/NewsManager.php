@@ -1,6 +1,6 @@
 <?php
 
-namespace Sano\NewsdBundle\Models;
+namespace Sano\NewsBundle\Models;
 
 use Doctrine\ORM\EntityManager;
 use Sano\NewsBundle\Entity\News;
