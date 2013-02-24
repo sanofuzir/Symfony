@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="news")
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Acme\DemoBundle\Entity\News")
+ * @ORM\Entity(repositoryClass="Acme\DemoBundle\Entity\NewsRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class News

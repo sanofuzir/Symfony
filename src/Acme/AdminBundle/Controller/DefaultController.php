@@ -60,13 +60,13 @@ class DefaultController extends Controller
         
      /**
      * @Route("/novice/edit/{id}", name="_edit")
-      * @Route("/add", name="_news_add")
+      * @Route("/add{id}", name="_news_add")
       * @Route("/edit/{id}", name="_edit")
      * @Template()
      */
     public function EditAction(Request $request, $id)
     {
-        if ($id) {
+        if ($id!=0) {
             $entity = $this->getNewsManager()->findNews($id);            
         } else {
             $entity = $this->getNewsManager()->createNews();

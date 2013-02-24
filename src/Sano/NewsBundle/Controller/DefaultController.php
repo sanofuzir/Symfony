@@ -36,4 +36,50 @@ class DefaultController extends Controller
         
         return array( 'news' => $news );
     }
+    /**
+     * @Route("/delete/{id}", name="_deleteNews", requirements={"id" = "\d{1,4}"}) 
+     */
+    public function deleteNewsAdminAction($id)
+    {
+        
+        $SingleNews = $this->getNewsManager()->findNews($id);
+
+        if ($SingleNews) {
+            $this->getNewsManager()->deleteNews($SingleNews);
+            $this->get('session')->setFlash('notice', 'Novica Izbrisana!');
+        }
+        return $this->redirect($this->generateUrl('_news'));
+    }
+    /**
+     * @Route("/edit/{id}", name="_editNews")
+     * @Route("/add", name="_addNews")
+     * @Template()
+     */
+    public function EditAction(Request $request, $id=NULL)
+    {
+        if ($id) {
+            $entity = $this->getNewsManager()->findNews($id);            
+        } else {
+            $entity = $this->getNewsManager()->createNews();
+        }
+        $form  = $this->createForm(new NewsForm(), $entity);
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                
+                $this->getNewsManager()->saveNews($entity);
+                if ($id) {
+                   $this->get('session')->setFlash('notice', 'News was edited!');
+                } else {
+                    $this->get('session')->setFlash('notice', 'News was added!');
+                }
+                return $this->redirect($this->generateUrl('_news'));
+            }
+        }
+        return array(
+                     'form'   => $form->createView(),
+                     'id'     => $id,
+        );  
+    } 
+    
 }
