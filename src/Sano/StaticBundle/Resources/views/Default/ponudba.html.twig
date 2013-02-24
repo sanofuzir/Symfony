@@ -1,0 +1,24 @@
+{% extends 'SanoStaticBundle::layout.html.twig' %}
+
+{% block title %}Sano Fužir{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+<div class="vsebina">
+    <h1>Ponudba:</h1>
+    <p>Text....</p>
+    <h1>Reference:</h1>
+    <p><a href="http://www.doric.si/" target="_blank">www.doric.si</a></p>
+    <p><a href="http://www.airtrack-europe.si/" target="_blank">www.airtrack-europe.si</a></p>
+    <p><a href="http://www.airfunproducts.com/" target="_blank">www.airfunproducts.com</a></p>
+</div>
+    
+    
+
+    
+
+    
+{% endblock %}

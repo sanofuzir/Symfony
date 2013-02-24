@@ -12,6 +12,7 @@ use Acme\DemoBundle\Form\NewsForm;
 
 /**
  * @Route("/admin")
+ * @Route("/admin/novice")
  */
 class DefaultController extends Controller
 {
@@ -28,6 +29,7 @@ class DefaultController extends Controller
 
     /**
      * @Route("/novice", name="_newsAdmin")
+     * @Route("/", name="_newsAdmin")
      * @Template("AcmeAdminBundle:Default:news.html.twig")
      */
     public function indexAction()
@@ -52,55 +54,14 @@ class DefaultController extends Controller
         if ($SingleNews) {
             $this->getNewsManager()->deleteNews($SingleNews);
             $this->get('session')->setFlash('notice', 'Novica Izbrisana!');
-            $this->redirect($this->generateUrl('_newsAdmin'));
         }
         return $this->redirect($this->generateUrl('_newsAdmin'));
     }
-    
-    /**
-     * @Route("/admin/novice/add", name="_news_add")
-     * @Template()
-     */
-    public function NewsAddAction(Request $request)
-    {
-        
-        $news = new News();
-        $news->setTitle('Write a title');
-        $news->setSummary('Write a summary');
-        $news->setText('Write a news');
-        $news->setStatus('active, draft');
-        
-        $form = $this->createForm(new NewsForm(), $news);
-        
-        if ('POST' == $request->getMethod()) {
-            $form->bindRequest($request);
-            if ($form->isValid()) {
-                
-                $new_news = new News();
-                $new_news->setTitle($news->getTitle());
-                $new_news->setSummary($news->getSummary());
-                $new_news->setText($news->getText());
-                $new_news->setStatus($news->getStatus());
-                $new_news->setCreationDate();
-                $new_news->setEditingDate(new \DateTime('now'));
-                
-                if ($new_news->getStatus() == "active") {
-                    $new_news->setPublicationDate(new \DateTime('now'));
-                }else{
-                    $new_news->setPublicationDate(NULL);
-                }
-                
-                $this->getNewsManager()->saveNews($new_news);
-                $this->get('session')->setFlash('notice', 'Novica dodana!');
-                }
-            }
-            return $this->render('AcmeAdminBundle:Default:new.html.twig', array(
-                                        'form' => $form->createView(),
-                                        ));
-        }
         
      /**
      * @Route("/novice/edit/{id}", name="_edit")
+      * @Route("/add", name="_news_add")
+      * @Route("/edit/{id}", name="_edit")
      * @Template()
      */
     public function EditAction(Request $request, $id)
@@ -114,12 +75,13 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-                $entity->setEditingDate(new \DateTime('now'));
-                if ($entity->getStatus() == "active") {
-                    $entity->setPublicationDate(new \DateTime('now'));
-                }
+                
                 $this->getNewsManager()->saveNews($entity);
-                $this->get('session')->setFlash('success', 'News was edited!');
+                if ($id) {
+                   $this->get('session')->setFlash('success', 'News was edited!');
+                } else {
+                    $this->get('session')->setFlash('success', 'News was added!');
+                }
                 return $this->redirect($this->generateUrl('_newsAdmin'));
             }
         }

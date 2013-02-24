@@ -1,6 +1,6 @@
 <?php
 
-namespace Acme\DemoBundle\Entity;
+namespace Sano\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="news")
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="Acme\DemoBundle\Entity\News")
+ * @ORM\Entity(repositoryClass="Sano\NewsBundle\Entity\News")
  * @ORM\HasLifecycleCallbacks
  */
 class News

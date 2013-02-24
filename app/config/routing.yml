@@ -1,14 +1,32 @@
-AcmeAdminBundle:
-    resource: "@AcmeAdminBundle/Resources/config/routing.yml"
+sano_admin:
+    resource: "@SanoAdminBundle/Controller/"
+    type:     annotation
     prefix:   /admin
+
+_static:
+    pattern:  /
+    defaults: { _controller: SanoStaticBundle:default:index }
+
+sano_news:
+    resource: "@SanoNewsBundle/Controller/"
+    type:     annotation
+    prefix:   /news
+
+SanoStaticBundle:
+    resource: "@SanoStaticBundle/Controller/"
+    prefix:   /
+
+#AcmeAdminBundle:
+ #   resource: "@AcmeAdminBundle/Resources/config/routing.yml"
+  #  prefix:   /admin
    
-AdminController:
-    resource: "@AcmeAdminBundle/Controller/DefaultController.php"
-    type:     annotation
+#AdminController:
+ #   resource: "@AcmeAdminBundle/Controller/DefaultController.php"
+  #  type:     annotation
     
-WelcomeController:
-    resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-    type:     annotation
+#WelcomeController:
+ #   resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
+  #  type:     annotation
 
 # Internal routing configuration to handle ESI
 # ****** WARNING ******

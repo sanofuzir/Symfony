@@ -1,9 +1,9 @@
 <?php
 
-namespace Acme\DemoBundle\Models;
+namespace Sano\NewsdBundle\Models;
 
 use Doctrine\ORM\EntityManager;
-use Acme\DemoBundle\Entity\News;
+use Sano\NewsBundle\Entity\News;
 
 class NewsManager {
 

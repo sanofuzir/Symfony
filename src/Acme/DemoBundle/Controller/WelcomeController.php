@@ -21,28 +21,19 @@ class WelcomeController extends Controller
     {
         return $this->container->get('acme.news_manager');
     }
-    
-    public function indexAction()
+    /**
+     * @Route("/", name="_home")
+     * @Route("/novice/{limit}/{order}", name="_news", defaults={"limit" = 10, "order"= "DESC"})
+     * @Template()
+     */
+    public function indexAction($limit = 2, $order='DESC')
     {
-        $repository = $this->getDoctrine()
-                           ->getRepository('AcmeDemoBundle:News');
-        
-        $query = $repository->createQueryBuilder('n')
-            ->where('n.status = :status')
-            ->setParameter('status', 'active')
-            ->orderBy('n.publication_date', 'DESC')
-            ->setMaxResults(2)
-            ->getQuery();
-
-        $news = $query->getResult();
+        $news = $this->getNewsManager()->findAllActive($limit, $order);
         
         if (!$news) {
-            throw $this->createNotFoundException('No News found!');
-        }
-        
-        return $this->render('AcmeDemoBundle:Welcome:index.html.twig', array(
-                        'news' => $news,
-                      ));
+             throw $this->createNotFoundException('No News found!');
+         }
+         return array( 'news' => $news );
     }
     
     /**
@@ -80,29 +71,14 @@ class WelcomeController extends Controller
     {
         return $this->render('AcmeDemoBundle:Welcome:kontakt.html.twig');
     }
-        
-     /**
-     * @Route("/novice", name="_news")
-     * @Template()
-     */
-    public function NewsAction()
-    {
-        $news = $this->getNewsManager()->findAll();
-        
-        if (!$news) {
-            throw new $this->createNotFoundException('No News found!');
-        }
-        
-        return array( 'news' => $news );
-    }
-    
+            
     /**
      * @Route("/novice/{id}", name="_singlenews", requirements={"id" = "\d{1,4}"})
      * @Template()
      */
     public function SingleNewsAction($id)
     {
-        $SingleNews = $this->getNewsManager()->findNews($id);
+        $SingleNews = $this->getNewsManager()->getActiveNews($id);
         
         return array( 'news' => $SingleNews );
     }
