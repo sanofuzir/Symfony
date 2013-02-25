@@ -36,6 +36,7 @@ class DefaultController extends Controller
         
         return array( 'news' => $news );
     }
+    
     /**
      * @Route("/delete/{id}", name="_deleteNews", requirements={"id" = "\d{1,4}"}) 
      */
@@ -50,8 +51,8 @@ class DefaultController extends Controller
         }
         return $this->redirect($this->generateUrl('_news'));
     }
+    
     /**
-     * @Route("/edit", name="_editNews")
      * @Route("/edit/{id}", name="_editNews")
      * @Route("/add", name="_addNews")
      * @Template()
