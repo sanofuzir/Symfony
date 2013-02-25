@@ -8,25 +8,26 @@
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
       <div class="vsebina">
-          <div class="novica">
-          <h2>Novica</h2>
-          <p>Text</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
-          </div>
-        <div class="novica">
-          <h2>Novica</h2>
-          <p>Text</p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+          
+         {% for item in news %}
+            <div class="novica">
+                <h2>Naslov</h2>{{ item.getTitle }}<br />
+                <p>Povzetek:</p><br />{{ item.getSummary }}<br />
+                <p>Datum ustvarjanja:</p>{{ item.getCreationDate|date('d.m.Y H:i:s') }}<br />
+                <a href="{{ path('_singleNews', ({'id': item.getId})) }}" >Več &raquo;</a>
+            </div>
+        {% endfor %}
+ 
+       <div class="novica">
+            <h2>Ankata</h2>
+            <p>Text</p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
        </div>
-       <div  class="novica">
-        <h2>Ankata</h2>
-        <p>Text</p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
-        </div>
+          
         <div  class="novica">
-        <h2>Povezave, oglasi</h2>
-        <p><a href="{{ path('_news') }}">News</a></p>
-        <p><a class="btn" href="#">View details &raquo;</a></p>
+            <h2>Povezave, oglasi</h2>
+            <p><a href="{{ path('_news') }}">News</a></p>
+            <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
      </div>
       

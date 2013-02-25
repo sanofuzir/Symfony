@@ -9,7 +9,7 @@
 
 <div class="vsebina">
     <h1>Arhiv Novic:</h1>
-    <a href="{{ path('_addNews') }} " >Dodaj novico</a>
+    <a href="{{ path('_addNews') }}" >Dodaj novico</a>
     {% for item in news %}
     <div id="news">
         <span>Naslov:</span>{{ item.getTitle }}<br />
@@ -20,7 +20,5 @@
     </div>
 {% endfor %}
 </div>
-
-
-      
+  
 {% endblock %}

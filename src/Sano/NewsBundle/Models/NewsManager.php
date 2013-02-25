@@ -26,9 +26,9 @@ class NewsManager {
      * @return News
      */
     
-    public function findAllActive($limit = 2, $order = "DESC")
+    public function findAllActive($limit = 2)
     {
-        return $this->repository->findAllActive($limit, $order);
+        return $this->repository->findAllActive($limit);
     }
     /**
      * @return News

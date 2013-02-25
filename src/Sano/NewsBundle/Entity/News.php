@@ -78,7 +78,7 @@ class News
     /**
      * @var string
      *
-     * @ORM\Column(name="editing_date", type="datetime")
+     * @ORM\Column(name="editing_date", type="datetime", nullable=true)
      */
     private $editing_date;
     
@@ -182,11 +182,6 @@ class News
      */
     public function setStatus($status)
     {
-        $status = strtoupper($status);
-
-        if (!in_array($status, self::$statuses)) {
-            $status = self::DEFAULT_STATUS;
-        }
         $this->status = $status;
     
         return $this;
@@ -258,13 +253,6 @@ class News
     {
         return $this->publication_date;
     }
-    
-    public static function getAvaliableStatuses()
-    {
-        //array_merge (self::$statuses, = array('' => , );
-        return self::$statuses;
-    }
-   
 
     /**
      * Set creation_date

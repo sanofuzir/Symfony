@@ -51,13 +51,14 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('_news'));
     }
     /**
+     * @Route("/edit", name="_editNews")
      * @Route("/edit/{id}", name="_editNews")
      * @Route("/add", name="_addNews")
      * @Template()
      */
     public function EditAction(Request $request, $id=NULL)
     {
-        if ($id) {
+        if ($id!=NULL) {
             $entity = $this->getNewsManager()->findNews($id);            
         } else {
             $entity = $this->getNewsManager()->createNews();
@@ -82,4 +83,17 @@ class DefaultController extends Controller
         );  
     } 
     
+    /**
+     * @Route("/{id}", name="_singleNews")
+     * @Template()
+     */
+    public function singleNewsAction($id)
+    {
+        $news = $this->getNewsManager()->findNews($id);
+        
+        if (!$news) {
+            throw new $this->createNotFoundException('No News found!');
+        }
+        return array( 'news' => $news );
+    }
 }

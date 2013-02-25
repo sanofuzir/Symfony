@@ -1,4 +1,4 @@
-sano_admin:
+sanoAdminBundle:
     resource: "@SanoAdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
@@ -7,7 +7,7 @@ _static:
     pattern:  /
     defaults: { _controller: SanoStaticBundle:default:index }
 
-sano_news:
+sanoNewsBundle:
     resource: "@SanoNewsBundle/Controller/"
     type:     annotation
     prefix:   /news

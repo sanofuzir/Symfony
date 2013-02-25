@@ -18,4 +18,14 @@ class NewsRepository extends EntityRepository
             ->createQuery('SELECT n FROM SanoNewsBundle:news n ORDER BY n.creation_date DESC')
             ->getResult();
     }
+    
+    public function findAllActive($limit)
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT n FROM SanoNewsBundle:news n 
+                            WHERE n.status = 'active'
+                            ORDER BY n.creation_date DESC")
+            ->setMaxResults($limit)
+            ->getResult();
+    }
 }
