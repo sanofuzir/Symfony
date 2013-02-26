@@ -12,11 +12,12 @@
     <a href="{{ path('_addNews') }}" >Dodaj novico</a>
     {% for item in news %}
     <div id="news">
-        <span>Naslov:</span>{{ item.getTitle }}<br />
-        <span>Povzetek:</span><br />{{ item.getSummary }}<br />
-        <span>Datum ustvarjanja:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}<br />
-        <a href="{{ path('_deleteNews', ({'id': item.getId})) }}" >Izbriši</a>
+        <p><span>Naslov:</span>{{ item.getTitle }}</p>
+        <p><span>Povzetek:</span><br />{{ item.getSummary }}</p>
+        <p><span>Datum ustvarjanja:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
+        <a href="{{ path('_singleNews', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
         <a href="{{ path('_editNews', ({'id': item.getId})) }}" >Uredi</a>
+        <a href="{{ path('_deleteNews', ({'id': item.getId})) }}" >Izbriši</a>
     </div>
 {% endfor %}
 </div>

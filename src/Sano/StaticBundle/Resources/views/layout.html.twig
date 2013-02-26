@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <script type="text/javascript" src="{{ asset('bundles/sano/tinymce/jscripts/tiny_mce/tiny_mce.js') }}"></script>
+    <script type="text/javascript">
+        tinyMCE.init({mode : "textareas"});
+    </script>
     <!-- Le styles -->
     
     <link href="{{ asset('bundles/sano/bootstrap/css/bootstrap.css') }}" rel="stylesheet">

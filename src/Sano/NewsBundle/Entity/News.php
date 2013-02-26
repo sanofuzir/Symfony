@@ -236,10 +236,11 @@ class News
      *
      * @param \DateTime $publicationDate
      * @return News
+     * @ORM\PreUpdate
      */
-    public function setPublicationDate($date)
+    public function setPublicationDate()
     {
-        $this->publication_date = $date;
+        $this->publication_date = new \DateTime('now');
     
         return $this;
     }
