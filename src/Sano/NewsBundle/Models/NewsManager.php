@@ -33,6 +33,13 @@ class NewsManager {
     /**
      * @return News
      */
+    public function getSortedNews($year)
+    {
+    	return $this->repository->getSortedNews($year);
+    }
+    /**
+     * @return News
+     */
     
     public function findNews($id)
     {

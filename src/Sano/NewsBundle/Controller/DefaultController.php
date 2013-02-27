@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\NewsBundle\Entity\News;
 use Sano\NewsBundle\Form\NewsForm;
+use Sano\NewsBundle\Form\sortNewsForm;
 
 class DefaultController extends Controller
 {
@@ -24,17 +25,34 @@ class DefaultController extends Controller
     
     /**
      * @Route("/", name="_news")
+     * @Route("/{year}", name="_sortedNews")
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request, $year = NULL)
     {
-        $news = $this->getNewsManager()->findAll();
+        $form  = $this->createForm(new sortNewsForm());
         
+        var_dump($year);
+        
+        if ($year!=NULL) {
+            if ($request->isMethod('POST')) {
+                $form->bind($request);
+                if ($form->isValid()) {
+                    $news = $this->getNewsManager()->getSortedNews($year);
+                }
+            }
+        }else{
+            $news = $this->getNewsManager()->findAll();
+        }
+        var_dump($news);
         if (!$news) {
             throw new $this->createNotFoundException('No News found!');
         }
         
-        return array( 'news' => $news );
+        return array( 'news' => $news,
+                      'year' => $year,
+                      'form'   => $form->createView(),
+            );
     }
     
     /**

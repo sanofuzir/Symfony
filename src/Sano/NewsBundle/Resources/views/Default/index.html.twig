@@ -9,7 +9,14 @@
 
 <div class="vsebina">
     <h1>Arhiv Novic:</h1>
-    <a href="{{ path('_addNews') }}" >Dodaj novico</a>
+    
+    <a href="{{ path('_addNews') }}" ><strong>Dodaj novico</strong></a>
+    <p><br /><strong>Sortiraj po letu in mesecu:</strong></p>
+    <form action="{{ path('_sortedNews', {'year': year}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+            <input type="submit" value="Sortiraj" />
+    </form>
+    
     {% for item in news %}
     <div id="news">
         <p><span>Naslov:</span>{{ item.getTitle }}</p>

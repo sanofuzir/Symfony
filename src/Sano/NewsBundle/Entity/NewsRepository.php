@@ -28,4 +28,14 @@ class NewsRepository extends EntityRepository
             ->setMaxResults($limit)
             ->getResult();
     }
+    public function getSortedNews($year)
+    {
+        return $this->getEntityManager()
+            ->createQuery("SELECT n FROM SanoNewsBundle:news n 
+                            WHERE n.creation_date = :year
+                            ORDER BY n.creation_date DESC")
+            ->setParameter('year', $year)
+            ->getResult();
+    }
+
 }
