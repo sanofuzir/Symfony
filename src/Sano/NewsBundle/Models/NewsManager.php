@@ -33,9 +33,10 @@ class NewsManager {
     /**
      * @return News
      */
-    public function getSortedNews($year)
+    public function getArchive($year, $month)
     {
-    	return $this->repository->getSortedNews($year);
+        $AllNews = $this->repository->getArchive($year, $month);
+
     }
     /**
      * @return News

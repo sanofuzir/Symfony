@@ -15,27 +15,25 @@ class NewsRepository extends EntityRepository
     public function findAll()
     {
         return $this->getEntityManager()
-            ->createQuery('SELECT n FROM SanoNewsBundle:news n ORDER BY n.creation_date DESC')
-            ->getResult();
+                    ->createQuery('SELECT n FROM SanoNewsBundle:news n ORDER BY n.creation_date DESC')
+                    ->getResult();
     }
     
     public function findAllActive($limit)
     {
         return $this->getEntityManager()
-            ->createQuery("SELECT n FROM SanoNewsBundle:news n 
-                            WHERE n.status = 'active'
-                            ORDER BY n.creation_date DESC")
-            ->setMaxResults($limit)
-            ->getResult();
+                    ->createQuery("SELECT n FROM SanoNewsBundle:news n 
+                                    WHERE n.status = 'active'
+                                    ORDER BY n.creation_date DESC")
+                    ->setMaxResults($limit)
+                    ->getResult();
     }
-    public function getSortedNews($year)
+    public function getArchive($year, $month)
     {
         return $this->getEntityManager()
-            ->createQuery("SELECT n FROM SanoNewsBundle:news n 
-                            WHERE n.creation_date = :year
-                            ORDER BY n.creation_date DESC")
-            ->setParameter('year', $year)
-            ->getResult();
+                    ->createQuery("SELECT YEAR(n.creation_date) FROM SanoNewsBundle:news n  WHERE n.id =:id")
+                    ->setParameter('id', $id)
+                    ->getResult();
+        GROUP BY!!!!GROUP BY!!!!GROUP BY!!!!GROUP BY!!!!GROUP BY!!!!GROUP BY!!!!GROUP BY!!!!
     }
-
 }

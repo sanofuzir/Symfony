@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\NewsBundle\Entity\News;
 use Sano\NewsBundle\Form\NewsForm;
-use Sano\NewsBundle\Form\sortNewsForm;
+use Sano\NewsBundle\Form\arhiveNewsForm;
 
 class DefaultController extends Controller
 {
@@ -25,33 +25,17 @@ class DefaultController extends Controller
     
     /**
      * @Route("/", name="_news")
-     * @Route("/{year}", name="_sortedNews")
      * @Template()
      */
-    public function indexAction(Request $request, $year = NULL)
+    public function indexAction()
     {
-        $form  = $this->createForm(new sortNewsForm());
-        
-        var_dump($year);
-        
-        if ($year!=NULL) {
-            if ($request->isMethod('POST')) {
-                $form->bind($request);
-                if ($form->isValid()) {
-                    $news = $this->getNewsManager()->getSortedNews($year);
-                }
-            }
-        }else{
-            $news = $this->getNewsManager()->findAll();
-        }
-        var_dump($news);
+        $news = $this->getNewsManager()->findAll();
+
         if (!$news) {
             throw new $this->createNotFoundException('No News found!');
         }
         
         return array( 'news' => $news,
-                      'year' => $year,
-                      'form'   => $form->createView(),
             );
     }
     
@@ -115,4 +99,23 @@ class DefaultController extends Controller
         }
         return array( 'news' => $news );
     }
+    
+    /**
+     * @Route("/{year}/{month}", name="_arhiveNews")
+     * @Template()
+     */
+    public function arhiveAction(Request $request, $year=NULL, $month=NULL)
+    {
+
+        $form  = $this->createForm(new arhiveNewsForm());
+        
+        $news = $this->getNewsManager()->getArchive($year, $month);
+
+        return array(
+                     'form'   => $form->createView(),
+                     'year' => $year,
+                     'month' => $month,
+                     'news' => $news,
+        );  
+    } 
 }
