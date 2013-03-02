@@ -13,4 +13,8 @@ if (!function_exists('intl_get_error_code')) {
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
+$classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', 
+        '', __DIR__.'/../vendor/doctrine/common/lib/DoctrineExtensions');
+$classLoader->register();
+
 return $loader;
