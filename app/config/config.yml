@@ -50,12 +50,11 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         auto_mapping: true
-        
+
     dql:
-       month_functions:
-       month: Sano\CommonBundle\DQL\Month
-       year_functions:
-       year: Sano\CommonBundle\DQL\Year
+       datetime_functions:
+       Year: Sano\CommonBundle\DQL\Year
+       Month: Sano\CommonBundle\DQL\Month
 
 # Swiftmailer Configuration
 swiftmailer:
