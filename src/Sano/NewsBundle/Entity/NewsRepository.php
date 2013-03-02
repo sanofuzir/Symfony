@@ -34,12 +34,14 @@ class NewsRepository extends EntityRepository
         $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
         $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
     
-        return $this->getEntityManager()
-                    ->createQuery("SELECT n FROM SanoNewsBundle:news n
-                                   WHERE YEAR(n.creation_date)=:year AND MONTH(n.creation_date)=:month
-                                   GROUP BY n.creation_date")
-                    ->setParameter('year', $year)
-                    ->setParameter('month', $month)
-                    ->getResult();
+         $this->createQueryBuilder('n');
+                $qb->select('n')
+                   ->where('YEAR(n.creation_date) = :year')
+                   ->andWhere('MONTH(n.creation_date) = :month');
+
+                $qb->setParameter('year', $year)
+                   ->setParameter('month', $month);
+                
+                return $qb->getQuery()->getResult();
     }
 }
