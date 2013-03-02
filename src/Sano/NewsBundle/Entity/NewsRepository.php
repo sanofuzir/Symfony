@@ -29,15 +29,13 @@ class NewsRepository extends EntityRepository
                     ->getResult();
     }
     public function getArchive($year, $month)
-    {
-        $emConfig = $this->getEntityManager()->getConfiguration();
-        $emConfig->addCustomDatetimeFunction('YEAR', 'DoctrineExtensions\Query\Mysql\Year');
-        $emConfig->addCustomDatetimeFunction('MONTH', 'DoctrineExtensions\Query\Mysql\Month');
-    
+    {    
         return $this->getEntityManager()
                     ->createQuery("SELECT n FROM SanoNewsBundle:news n
                                    WHERE YEAR(n.creation_date)=:year AND MONTH(n.creation_date)=:month
-                                   GROUP BY n.creation_date")
+                                   GROUP BY n.creation_date
+                                   ORDER BY n.creation_date DESC
+                                   LIMIT 30")
                     ->setParameter('year', $year)
                     ->setParameter('month', $month)
                     ->getResult();
