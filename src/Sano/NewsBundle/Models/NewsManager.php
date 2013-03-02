@@ -35,7 +35,7 @@ class NewsManager {
      */
     public function getArchive($year, $month)
     {
-        $AllNews = $this->repository->getArchive($year, $month);
+        return $this->repository->getArchive($year, $month);
 
     }
     /**
