@@ -33,7 +33,6 @@ class NewsRepository extends EntityRepository
         return $this->getEntityManager()
                     ->createQuery("SELECT n FROM SanoNewsBundle:news n
                                    WHERE YEAR(n.creation_date)=:year AND MONTH(n.creation_date)=:month
-                                   GROUP BY n.creation_date
                                    ORDER BY n.creation_date DESC
                                    LIMIT 30")
                     ->setParameter('year', $year)
