@@ -42,17 +42,6 @@ class Post
      */
     private $creation_date;
 
-
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
-     * })
-     */
-    private $user;
-
     /**
      * @var \Image
      *
@@ -135,29 +124,6 @@ class Post
     }
 
     /**
-     * Set user
-     *
-     * @param \Sano\BlogBundle\Entity\User $user
-     * @return Post
-     */
-    public function setUser(\Sano\BlogBundle\Entity\User $user = null)
-    {
-        $this->user = $user;
-    
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return \Sano\BlogBundle\Entity\User 
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
      * Set image
      *
      * @param \Sano\BlogBundle\Entity\Image $image
@@ -178,5 +144,18 @@ class Post
     public function getImage()
     {
         return $this->image;
+    }
+
+    /**
+     * Set creation_date
+     *
+     * @param \DateTime $creationDate
+     * @return Post
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
+    
+        return $this;
     }
 }

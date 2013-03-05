@@ -4,17 +4,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
+    
     <parameters>
-        <parameter key="sano_blog.example.class">Sano\BlogBundle\Example</parameter>
+        <parameter key="sano.entity.post.class">Sano\BlogBundle\Entity\Post</parameter>
+        <parameter key="sano.post_manager.class">Sano\BlogBundle\Models\PostManager</parameter>
     </parameters>
 
     <services>
-        <service id="sano_blog.example" class="%sano_blog.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="twig.extension.sano.demo" class="Sano\BlogBundle\Twig\Extension\DemoExtension" public="false">
+            <tag name="twig.extension" />
+            <argument type="service" id="twig.loader" />
+        </service>
+        <service id="sano.demo.listener" class="Sano\BlogBundle\EventListener\ControllerListener">
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
+            <argument type="service" id="twig.extension.sano.demo" />
+        </service>
+        <service id="sano.post_manager" class="%sano.post_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument>%sano.entity.post.class%</argument>
         </service>
     </services>
-    -->
+    
 </container>
