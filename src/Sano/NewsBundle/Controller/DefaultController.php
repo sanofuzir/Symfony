@@ -105,14 +105,10 @@ class DefaultController extends Controller
      * @Template()
      */
     public function arhiveAction(Request $request, $year=NULL, $month=NULL)
-    {
-
-        $form  = $this->createForm(new arhiveNewsForm());
-        
+    {        
         $news = $this->getNewsManager()->getArchive($year, $month);
 
         return array(
-                     'form'   => $form->createView(),
                      'year' => $year,
                      'month' => $month,
                      'news' => $news,

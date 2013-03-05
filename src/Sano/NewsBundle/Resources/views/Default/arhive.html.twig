@@ -10,8 +10,6 @@
 <div class="vsebina">
     <h1>Novice v letu {{ year }} mesec {{ month }}</h1>
     
-    <a href="{{ path('_addNews') }}" ><strong>Dodaj novico</strong></a>
-    
     {% for item in news %}
         <div id="news">
             <p><span>Naslov:</span>{{ item.getTitle }}</p>

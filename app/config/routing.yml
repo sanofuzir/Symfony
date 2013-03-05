@@ -1,12 +1,7 @@
-sano_common:
-    resource: "@SanoCommonBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 sano_blog:
     resource: "@SanoBlogBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /blog
 
 sanoAdminBundle:
     resource: "@SanoAdminBundle/Controller/"

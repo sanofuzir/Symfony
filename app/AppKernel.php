@@ -24,7 +24,6 @@ class AppKernel extends Kernel
             new Sano\NewsBundle\SanoNewsBundle(),
             new Sano\AdminBundle\SanoAdminBundle(),
             new Sano\BlogBundle\SanoBlogBundle(),
-            new Sano\CommonBundle\SanoCommonBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('prod', 'dev', 'test'))) {

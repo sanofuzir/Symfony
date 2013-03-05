@@ -30,13 +30,15 @@ class NewsRepository extends EntityRepository
     }
     public function getArchive($year, $month)
     {    
-        return $this->getEntityManager()
-                    ->createQuery("SELECT n FROM SanoNewsBundle:news n
-                                   WHERE YEAR(n.creation_date)=:year AND MONTH(n.creation_date)=:month
-                                   ORDER BY n.creation_date DESC
-                                   LIMIT 30")
-                    ->setParameter('year', $year)
-                    ->setParameter('month', $month)
-                    ->getResult();
+        $rsm = new \Doctrine\ORM\Query\ResultSetMapping;
+        $rsm->addEntityResult('SanoNewsBundle:news', 'news');        
+
+        return $this->getEntityManager()                    
+                    ->createNativeQuery("SELECT * FROM news 
+                                            WHERE YEAR(creation_date)= ?
+                                            AND MONTH(creation_date)= ?
+                                            ORDER BY creation_date DESC", $rsm)
+                    ->setParameters(array(1 => $year, 2 => $month))
+                    ->getResult(); 
     }
 }
