@@ -36,6 +36,13 @@ class Post
      * @ORM\Column(name="text", type="text")
      */
     private $text;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="creation_date", type="datetime")
+     */
+    private $creation_date;
 
     /**
      * @var User
@@ -49,7 +56,7 @@ class Post
      * @var Image
      *
      * @ORM\ManyToOne(targetEntity="Image", inversedBy="ads")
-     * @ORM\JoinColumn(name="image", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="image", referencedColumnName="id", nullable=true)
      */
     private $image;
     
@@ -57,9 +64,13 @@ class Post
      * @var Video
      *
      * @ORM\ManyToOne(targetEntity="Video", inversedBy="ads")
-     * @ORM\JoinColumn(name="video", referencedColumnName="id", nullable=false)
+     * @ORM\JoinColumn(name="video", referencedColumnName="id", nullable=true)
      */
     private $video;
+    
+    public function __construct() {
+        $this->creation_date = new \DateTime('now');
+    }
 
     /**
      * Get id
@@ -115,6 +126,16 @@ class Post
     public function getText()
     {
         return $this->text;
+    }
+    
+    /**
+     * Get creation_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creation_date;
     }
     
     /**
