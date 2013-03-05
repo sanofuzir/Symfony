@@ -3,13 +3,11 @@
 namespace Sano\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sano\BlogBundle\Entity\Comment;
-use Sano\BlogBundle\Entity\Image;
 
 /**
  * Post
  *
- * @ORM\Table()
+ * @ORM\Table(name="post")
  * @ORM\Entity
  */
 class Post
@@ -17,23 +15,23 @@ class Post
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text")
+     * @ORM\Column(name="text", type="text", nullable=false)
      */
     private $text;
     
@@ -44,32 +42,30 @@ class Post
      */
     private $creation_date;
 
+
     /**
-     * @var User
+     * @var \User
      *
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="ads")
-     * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user", referencedColumnName="id")
+     * })
      */
     private $user;
-    
+
     /**
-     * @var Image
+     * @var \Image
      *
-     * @ORM\ManyToOne(targetEntity="Image", inversedBy="ads")
-     * @ORM\JoinColumn(name="image", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Image")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="image", referencedColumnName="id")
+     * })
      */
     private $image;
-    
-    /**
-     * @var Video
-     *
-     * @ORM\ManyToOne(targetEntity="Video", inversedBy="ads")
-     * @ORM\JoinColumn(name="video", referencedColumnName="id", nullable=true)
-     */
-    private $video;
-    
+
     public function __construct() {
         $this->creation_date = new \DateTime('now');
+        $this->status = self::STATUS_DRAFT;
     }
 
     /**
@@ -127,7 +123,7 @@ class Post
     {
         return $this->text;
     }
-    
+
     /**
      * Get creation_date
      *
@@ -137,70 +133,50 @@ class Post
     {
         return $this->creation_date;
     }
-    
+
     /**
      * Set user
      *
-     * @param User $user
-     * @return Ad
+     * @param \Sano\BlogBundle\Entity\User $user
+     * @return Post
      */
-    public function setUser(User $user)
+    public function setUser(\Sano\BlogBundle\Entity\User $user = null)
     {
         $this->user = $user;
+    
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return User 
+     * @return \Sano\BlogBundle\Entity\User 
      */
     public function getUser()
     {
         return $this->user;
     }
-    
+
     /**
      * Set image
      *
-     * @param Image $image
-     * @return Ad
+     * @param \Sano\BlogBundle\Entity\Image $image
+     * @return Post
      */
-    public function setImage(Image $image)
+    public function setImage(\Sano\BlogBundle\Entity\Image $image = null)
     {
         $this->image = $image;
+    
         return $this;
     }
 
     /**
      * Get image
      *
-     * @return Image 
+     * @return \Sano\BlogBundle\Entity\Image 
      */
     public function getImage()
     {
         return $this->image;
-    }
-    
-    /**
-     * Set video
-     *
-     * @param Video $image
-     * @return Ad
-     */
-    public function setVideo(Video $video)
-    {
-        $this->video = $video;
-        return $this;
-    }
-
-    /**
-     * Get video
-     *
-     * @return Video 
-     */
-    public function getVideo()
-    {
-        return $this->video;
     }
 }

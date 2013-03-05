@@ -3,7 +3,7 @@
 namespace Sano\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Sano\BlogBundle\Entity\Post;
+
 /**
  * Comment
  *
@@ -15,33 +15,37 @@ class Comment
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
      */
     private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", nullable=false)
      */
     private $comment;
 
     /**
-     * @var Post
+     * @var \Post
      *
-     * @ORM\ManyToOne(targetEntity="Post", inversedBy="ads")
-     * @ORM\JoinColumn(name="post", referencedColumnName="id", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Post")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="post", referencedColumnName="id")
+     * })
      */
     private $post;
+
+
 
     /**
      * Get id
@@ -98,27 +102,27 @@ class Comment
     {
         return $this->comment;
     }
-    
+
     /**
      * Set post
      *
-     * @param Post $post
-     * @return Ad
+     * @param \Sano\BlogBundle\Entity\Post $post
+     * @return Comment
      */
-    public function setPost(Post $post)
+    public function setPost(\Sano\BlogBundle\Entity\Post $post = null)
     {
         $this->post = $post;
+    
         return $this;
     }
 
     /**
      * Get post
      *
-     * @return Post 
+     * @return \Sano\BlogBundle\Entity\Post 
      */
     public function getPost()
     {
         return $this->post;
     }
-    
 }
