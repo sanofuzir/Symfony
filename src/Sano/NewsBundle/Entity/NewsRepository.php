@@ -30,23 +30,11 @@ class NewsRepository extends EntityRepository
     }
     public function getArchive($year, $month)
     {
-        $lastday = strftime("%d", mktime(0, 0, 0, ($month+1), 0, $year));   //last day in month
-        $minDate = date("Y-m-d H:i:s", mktime(0,0,0,$month,1,$year));          	//minimalna mejna vrednost, the MySQL DATETIME format
-        
-        $maxDate = date("Y-m-d H:i:s", mktime(23,59,59,$month,$lastday,$year));  //maksimalna mejna vrednost, the MySQL DATETIME format
-        
-        //še enkrat z maxDate z objekti in DateTime::add
-        //
-        //$maxDate = new DateTime($minDate);
-        //$maxDate->add(new DateInterval("P".$lastday."DT23H59M59S"));
-        //$maxDate->format('Y-m-d H:i:s');
-        
-        /*javi napako:
-         * Fatal error: Class 'Sano\NewsBundle\Entity\DateTime' not found in D:\htdocs\Symfony\src\Sano\NewsBundle\Entity\NewsRepository.php on line 38
-         */ 
-        
-        
-        
+        $minDate = date("Y-m-d H:i:s", mktime(0,0,0,$month,1,$year));   //minimalna mejna vrednost, the MySQL DATETIME format
+        $maxDate = new \DateTime($minDate);             //maximalna mejna vrednost, 
+        $maxDate->add(new \DateInterval("P1M"));        //interval 1 mesec
+        $maxDate->format('Y-m-d H:i:s');                //the MySQL DATETIME format
+
         return $this->getEntityManager()
                     ->createQuery("SELECT n FROM SanoNewsBundle:news n 
                                     WHERE n.creation_date > :minDate 
