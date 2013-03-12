@@ -28,12 +28,10 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $post = $this->getPostManager()->findAll();
-        
         if (!$post) {
             throw new $this->createNotFoundException('No Posts found!');
         }
         
-        return array( '$post' => $post,
-            );
+        return array( 'post' => $post);
     }
 }

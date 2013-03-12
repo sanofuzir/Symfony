@@ -9,17 +9,12 @@
 
 <div class="vsebina">
     <h1>Blog:</h1>
-    
-    <a href="{{ path('_home') }}" ><strong>Add Post</strong></a>
-    
+
     {% for item in post %}
     <div id="news">
-        <p><span>Naslov:</span>{{ item.getTitle }}</p>
-        <p><span>Povzetek:</span><br />{{ item.getText }}</p>
-        <p><span>Datum ustvarjanja:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
-        <a href="{{ path('_singleNews', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
-        <a href="{{ path('_editNews', ({'id': item.getId})) }}" >Uredi</a>
-        <a href="{{ path('_deleteNews', ({'id': item.getId})) }}" >Izbriši</a>
+        <p><span>Post Title:</span>{{ item.getTitle }}</p>
+        <p><span>Text:</span><br />{{ item.getText }}</p>
+        <p><span>Creation Date:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
     </div>
 {% endfor %}
 </div>

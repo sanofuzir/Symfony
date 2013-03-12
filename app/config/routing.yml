@@ -3,11 +3,6 @@ sano_blog:
     type:     annotation
     prefix:   /blog
 
-sanoAdminBundle:
-    resource: "@SanoAdminBundle/Controller/"
-    type:     annotation
-    prefix:   /admin
-
 _static:
     pattern:  /
     defaults: { _controller: SanoStaticBundle:default:index }

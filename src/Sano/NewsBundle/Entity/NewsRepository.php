@@ -29,16 +29,20 @@ class NewsRepository extends EntityRepository
                     ->getResult();
     }
     public function getArchive($year, $month)
-    {    
-        $rsm = new \Doctrine\ORM\Query\ResultSetMapping;
-        $rsm->addEntityResult('SanoNewsBundle:news', 'news');        
-
-        return $this->getEntityManager()                    
-                    ->createNativeQuery("SELECT * FROM news 
-                                            WHERE YEAR(creation_date)= ?
-                                            AND MONTH(creation_date)= ?
-                                            ORDER BY creation_date DESC", $rsm)
-                    ->setParameters(array(1 => $year, 2 => $month))
-                    ->getResult(); 
+    {
+        $lastday = strftime("%d", mktime(0, 0, 0, ($month+1), 0, $year));   //last day in month
+        $minDate = date("Y-m-d H:i:s", mktime(0,0,0,$month,1,$year));          	//minimalna mejna vrednost, the MySQL DATETIME format
+        $maxDate = date("Y-m-d H:i:s", mktime(23,59,59,$month,$lastday,$year));  //maksimalna mejna vrednost, the MySQL DATETIME format
+        
+        return $this->getEntityManager()
+                    ->createQuery("SELECT n FROM SanoNewsBundle:news n 
+                                    WHERE n.creation_date > :minDate 
+                                        AND n.creation_date < :maxDate
+                                    ORDER BY n.creation_date DESC")
+                    ->setParameters(array(
+                                    'minDate' => date($minDate),
+                                    'maxDate'  => date($maxDate),
+                                    ))
+                    ->getResult();
     }
 }
