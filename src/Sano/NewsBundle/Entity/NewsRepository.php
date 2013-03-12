@@ -40,8 +40,8 @@ class NewsRepository extends EntityRepository
                                         AND n.creation_date < :maxDate
                                     ORDER BY n.creation_date DESC")
                     ->setParameters(array(
-                                    'minDate' => date($minDate),
-                                    'maxDate'  => date($maxDate),
+                                    'minDate' => $minDate,
+                                    'maxDate'  => $maxDate,
                                     ))
                     ->getResult();
     }
