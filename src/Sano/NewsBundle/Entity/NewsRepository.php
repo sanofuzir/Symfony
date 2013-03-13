@@ -32,7 +32,6 @@ class NewsRepository extends EntityRepository
     {
         $minDate = new \DateTime($year . '-' . $month. '-01');
         
-
         $o = new \ReflectionObject($minDate);   //Bug #49382	can't access DateTime->date
         $p = $o->getProperty('date');
         $date = $p->getValue($minDate);
