@@ -10,8 +10,13 @@
 <div class="vsebina">
     <h1>Vse Novice:</h1>
     
-    <a href="{{ path('_addNews') }}" ><strong>Dodaj novico</strong></a>
-    
+    <a href="{{ path('_addNews') }}" ><strong>Dodaj novico</strong></a><br />
+    <h3>Skrinja:</h3>
+
+    {% for item in YearsAndMonths %}
+        <a href="{{ path('_arhiveNews', ({'year': item.getYear , 'month':  item.getMonth })) }}" >{{ item.getMonth }},{{ item.getYear }};</a><br />
+    {% endfor %}
+
     {% for item in news %}
     <div id="news">
         <p><span>Naslov:</span>{{ item.getTitle }}</p>

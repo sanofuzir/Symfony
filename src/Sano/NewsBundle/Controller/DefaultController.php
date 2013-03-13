@@ -30,12 +30,14 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $news = $this->getNewsManager()->findAll();
+        $YearsAndMonths = $this->getNewsManager()->getYearsAndMonths();
 
         if (!$news) {
             throw new $this->createNotFoundException('No News found!');
         }
         
         return array( 'news' => $news,
+                        'YearsAndMonths' => $YearsAndMonths,
             );
     }
     

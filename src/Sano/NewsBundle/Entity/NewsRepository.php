@@ -30,10 +30,16 @@ class NewsRepository extends EntityRepository
     }
     public function getArchive($year, $month)
     {
-        $minDate = date("Y-m-d H:i:s", mktime(0,0,0,$month,1,$year));   //minimalna mejna vrednost, the MySQL DATETIME format
-        $maxDate = new \DateTime($minDate);             //maximalna mejna vrednost, 
-        $maxDate->add(new \DateInterval("P1M"));        //interval 1 mesec
-        $maxDate->format('Y-m-d H:i:s');                //the MySQL DATETIME format
+        $minDate = new \DateTime($year . '-' . $month. '-01');
+        
+
+        $o = new \ReflectionObject($minDate);   //Bug #49382	can't access DateTime->date
+        $p = $o->getProperty('date');
+        $date = $p->getValue($minDate);
+        
+        $maxDate = new \DateTime($date);
+        $maxDate->add(new \DateInterval("P1M"));      
+        $maxDate->format('Y-m-d H:i:s');  
 
         return $this->getEntityManager()
                     ->createQuery("SELECT n FROM SanoNewsBundle:news n 
@@ -45,5 +51,15 @@ class NewsRepository extends EntityRepository
                                     'maxDate'  => $maxDate,
                                     ))
                     ->getResult();
+    }
+    public function getYearsAndMonths()
+    {
+         $YearsAndMonths = $this->getEntityManager()
+                    ->createQuery("SELECT YEAR(n.creation_date), MONTH(n.creation_date) 
+                                    FROM SanoNewsBundle:news n 
+                                    GROUP BY MONTH(n.creation_date)")
+                    ->getResult();
+        var_dump($YearsAndMonths);
+        return $YearsAndMonths;
     }
 }
