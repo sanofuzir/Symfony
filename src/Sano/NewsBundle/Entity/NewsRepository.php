@@ -59,7 +59,7 @@ class NewsRepository extends EntityRepository
                                     FROM SanoNewsBundle:news n 
                                     GROUP BY MONTH(n.creation_date)")
                     ->getResult();
-        var_dump($YearsAndMonths);
+
         return $YearsAndMonths;
     }
 }
