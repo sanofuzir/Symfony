@@ -14,7 +14,7 @@
     <h3>Skrinja:</h3>
 
     {% for item in YearsAndMonths %}
-        <a href="{{ path('_arhiveNews', ({'year': item.getYear , 'month':  item.getMonth })) }}" >{{ item.getMonth }},{{ item.getYear }};</a><br />
+        {{ include('SanoNewsBundle:Resources:views:Default:box.html.twig', {'item': item}) }}
     {% endfor %}
 
     {% for item in news %}

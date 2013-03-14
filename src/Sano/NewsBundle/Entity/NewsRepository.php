@@ -30,33 +30,29 @@ class NewsRepository extends EntityRepository
     }
     public function getArchive($year, $month)
     {
-        $minDate = new \DateTime($year . '-' . $month. '-01');
-        
-        $o = new \ReflectionObject($minDate);   //Bug #49382	can't access DateTime->date
-        $p = $o->getProperty('date');
-        $date = $p->getValue($minDate);
-        
-        $maxDate = new \DateTime($date);
-        $maxDate->add(new \DateInterval("P1M"));      
-        $maxDate->format('Y-m-d H:i:s');  
+        $fromDay = new \DateTime("$year-$month-01");
+        $toDay = clone $fromDay;
+        $toDay->add(new \DateInterval('P1M'));
+
+        // echo "From: " . $fromDay->format('c') . " to " . $toDay->format('c');
 
         return $this->getEntityManager()
-                    ->createQuery("SELECT n FROM SanoNewsBundle:news n 
-                                    WHERE n.creation_date > :minDate 
-                                        AND n.creation_date < :maxDate
-                                    ORDER BY n.creation_date DESC")
-                    ->setParameters(array(
-                                    'minDate' => $minDate,
-                                    'maxDate'  => $maxDate,
-                                    ))
-                    ->getResult();
+                            ->createQuery("SELECT n FROM SanoNewsBundle:news n
+                                            WHERE n.creation_date >= :minDate
+                                                AND n.creation_date < :maxDate
+                                            ORDER BY n.creation_date DESC")
+                            ->setParameters(array(
+                                            'minDate' => $fromDay,
+                                            'maxDate'  => $toDay,
+                                            ))
+                            ->getResult();
     }
     public function getYearsAndMonths()
     {
          return $this->getEntityManager()
                      ->createQuery("SELECT YEAR(n.creation_date), MONTH(n.creation_date) 
                                     FROM SanoNewsBundle:news n 
-                                    GROUP BY MONTH(n.creation_date)")
+                                    GROUP BY MONTH(n.creation_date), YEAR(n.creation_date)")
                      ->getResult();
     }
 }
