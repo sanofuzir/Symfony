@@ -39,24 +39,27 @@ assetic:
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   "%database_driver%"
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  UTF8
+        default_connection:   default
+        connections:
+            default:
+                driver:   "%database_driver%"
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
-        auto_mapping: true
         entity_managers:
-          default:
-            # ...
-            dql:
-              datetime_functions:
-                YEAR: Sano\NewsBundle\DQL\Year
-                MONTH: Sano\NewsBundle\DQL\Month
+          entity_managers:
+            default:
+                auto_mapping: true
+                dql:
+                    datetime_functions:
+                        test_year: Sano\NewsBundle\DQL\Year
+                        test_mont: Sano\NewsBundle\DQL\Month
 
 # Swiftmailer Configuration
 swiftmailer:
