@@ -1,4 +1,7 @@
-<div class="links">
-    {% render url('_arhiveNews', {'year': item.Year , 'month':  item.Month }) %}
+<div id="box">
+    <h3>Skrinja:</h3>
+    {% for item in YearsAndMonths %}
+        <a href="{{ path('_arhiveNews', ({'year': item.year, 'month': item.month})) }}" >
+            {{item.month}}.{{item.year}}&raquo;</a>
+    {% endfor %}
 </div>
-

@@ -11,11 +11,8 @@
     <h1>Vse Novice:</h1>
     
     <a href="{{ path('_addNews') }}" ><strong>Dodaj novico</strong></a><br />
-    <h3>Skrinja:</h3>
-
-    {% for item in YearsAndMonths %}
-        {{ include('SanoNewsBundle:Resources:views:Default:box.html.twig', {'item': item}) }}
-    {% endfor %}
+    
+    {{ render(controller('SanoNewsBundle:Default:box', { 'limit': 10 })) }}
 
     {% for item in news %}
     <div id="news">

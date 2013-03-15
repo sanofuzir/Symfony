@@ -40,9 +40,9 @@ class NewsManager {
     /**
      * @return News
      */
-    public function getYearsAndMonths()
+    public function getYearsAndMonths($limit)
     {
-    	return $this->repository->getYearsAndMonths();
+    	return $this->repository->getYearsAndMonths($limit);
     }
     public function findNews($id)
     {

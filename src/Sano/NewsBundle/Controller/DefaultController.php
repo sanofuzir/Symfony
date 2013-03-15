@@ -30,15 +30,12 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $news = $this->getNewsManager()->findAll();
-        $YearsAndMonths = $this->getNewsManager()->getYearsAndMonths();
 
         if (!$news) {
             throw new $this->createNotFoundException('No News found!');
         }
         
-        return array( 'news' => $news,
-                        'YearsAndMonths' => $YearsAndMonths,
-            );
+        return array( 'news' => $news);
     }
     
     /**
@@ -115,5 +112,13 @@ class DefaultController extends Controller
                      'month' => $month,
                      'news' => $news,
         );  
-    } 
+    }
+
+    public function boxAction($limit)
+    {
+        $YearsAndMonths = $this->getNewsManager()->getYearsAndMonths($limit);
+        
+        return $this->render('SanoNewsBundle:Default:box.html.twig', 
+                array( 'YearsAndMonths' => $YearsAndMonths )); 
+    }
 }

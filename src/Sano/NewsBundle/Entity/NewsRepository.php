@@ -47,12 +47,13 @@ class NewsRepository extends EntityRepository
                                             ))
                             ->getResult();
     }
-    public function getYearsAndMonths()
+    public function getYearsAndMonths($limit)
     {
          return $this->getEntityManager()
-                     ->createQuery("SELECT YEAR(n.creation_date), MONTH(n.creation_date) 
-                                    FROM SanoNewsBundle:news n 
-                                    GROUP BY MONTH(n.creation_date), YEAR(n.creation_date)")
+                     ->createQuery("SELECT YEAR(n.creation_date) AS year, MONTH(n.creation_date) AS month
+                                    FROM SanoNewsBundle:news n  
+                                    GROUP BY year, month")
+                     ->setMaxResults($limit)
                      ->getResult();
     }
 }
