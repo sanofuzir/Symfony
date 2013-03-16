@@ -1,3 +1,8 @@
+sano_admin:
+    resource: "@SanoAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
+
 sano_blog:
     resource: "@SanoBlogBundle/Controller/"
     type:     annotation
@@ -15,18 +20,6 @@ sanoNewsBundle:
 SanoStaticBundle:
     resource: "@SanoStaticBundle/Controller/"
     prefix:   /
-
-#AcmeAdminBundle:
- #   resource: "@AcmeAdminBundle/Resources/config/routing.yml"
-  #  prefix:   /admin
-   
-#AdminController:
- #   resource: "@AcmeAdminBundle/Controller/DefaultController.php"
-  #  type:     annotation
-    
-#WelcomeController:
- #   resource: "@AcmeDemoBundle/Controller/WelcomeController.php"
-  #  type:     annotation
 
 # Internal routing configuration to handle ESI
 # ****** WARNING ******

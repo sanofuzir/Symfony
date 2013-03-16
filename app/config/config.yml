@@ -54,8 +54,8 @@ doctrine:
                 auto_mapping: true
                 dql:
                     datetime_functions:
-                        test_year: Sano\NewsBundle\DQL\Year
-                        test_mont: Sano\NewsBundle\DQL\Month
+                        YEAR: Sano\NewsBundle\DQL\Year
+                        MONTH: Sano\NewsBundle\DQL\Month
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -8,12 +8,8 @@
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
 <div class="vsebina">
-    <h1>Vse Novice:</h1>
-    
-    <a href="{{ path('_addNews') }}" ><strong>Dodaj novico</strong></a><br />
-    
-    {{ render(controller('SanoNewsBundle:Default:box', { 'limit': 10 })) }}
-
+    {% render 'SanoNewsBundle:Default:box' with { 'limit': 10 } %}
+    <h3>Vse Novice:</h3>
     {% for item in news %}
     <div id="news">
         <p><span>Naslov:</span>{{ item.getTitle }}</p>

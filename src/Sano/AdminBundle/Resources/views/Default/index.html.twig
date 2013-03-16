@@ -1,0 +1,33 @@
+{% extends 'SanoStaticBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+<div class="vsebina">
+    <h1>Admin Module</h1>
+    <div id="admin">
+        <h3>Upravljanje z novicami</h3>
+        <p>
+            <a href="{{ path('_addNews') }}" ><strong>Dodajanje novic</strong></a>
+        </p>
+        <p>
+            <a href="{{ path('_news') }}" ><strong>Seznam in urejanje novic</strong></a>
+        </p>
+        {% render 'SanoNewsBundle:Default:box' with { 'limit': 10 } %}
+    </div>
+    <div id="admin">
+        <h3>Upravljanje z uporabniki</h3>
+        <p>
+            <a href="#" ><strong>Registracija uporabnikov</strong>
+        </p>
+        <p>
+            <a href="#" ><strong>Seznam in urejanje uporabnikov</strong>
+        </p>
+    </div>
+</div>
+  
+{% endblock %}
