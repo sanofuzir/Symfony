@@ -15,6 +15,11 @@
         <p><span>Post Title:</span>{{ item.getTitle }}</p>
         <p><span>Text:</span><br />{{ item.getText }}</p>
         <p><span>Creation Date:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
+        <p>
+            <a href="{{ path('_editPost', ({'id': item.getId})) }}" ><strong>Uredi</strong></a>
+            <a href="{{ path('_deletePost', ({'id': item.getId})) }}" ><strong>Izbriši</strong></a>
+            <a href="{{ path('_singlePost', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
+        </p>
     </div>
 {% endfor %}
 </div>

@@ -1,0 +1,21 @@
+{% extends 'SanoStaticBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+<div class="vsebina">
+    <div id="news">
+        <p><span>Naslov:</span>{{ post.getTitle }}</p>
+        <p><span>Text:</span><br />{{ post.getText }}</p>
+        <p><span>Datum ustvarjanja:</span>{{ post.getCreationDate|date('d.m.Y H:i:s') }}</p>
+        <p>Komentarji:</p>
+    </div>
+</div>
+
+
+      
+{% endblock %}

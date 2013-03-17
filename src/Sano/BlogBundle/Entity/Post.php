@@ -54,7 +54,6 @@ class Post
 
     public function __construct() {
         $this->creation_date = new \DateTime('now');
-        $this->status = self::STATUS_DRAFT;
     }
 
     /**

@@ -8,7 +8,8 @@
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
 <div class="vsebina">
-    <h1>Admin Module</h1>
+    <h1>Admin Control Panel</h1>
+    <hr />
     <div id="admin">
         <h3>Upravljanje z novicami</h3>
         <p>
@@ -22,10 +23,19 @@
     <div id="admin">
         <h3>Upravljanje z uporabniki</h3>
         <p>
-            <a href="#" ><strong>Registracija uporabnikov</strong>
+            <a href="#" ><strong>Registracija uporabnikov</strong></a>
         </p>
         <p>
-            <a href="#" ><strong>Seznam in urejanje uporabnikov</strong>
+            <a href="#" ><strong>Seznam in urejanje uporabnikov</strong></a>
+        </p>
+    </div>
+    <div id="admin">
+        <h3>Upravljanje z Blogom</h3>
+        <p>
+            <a href="{{ path('_addPost') }}" ><strong>Dodajanje objav</strong></a>
+        </p>
+        <p>
+            <a href="{{ path('_blog') }}" ><strong>Seznam objav in urejanje</strong></a>
         </p>
     </div>
 </div>
