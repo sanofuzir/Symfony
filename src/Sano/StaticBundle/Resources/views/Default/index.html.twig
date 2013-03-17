@@ -10,22 +10,26 @@
       <div class="vsebina">
           
          {% for item in news %}
-            <div class="novica">
-                <h2>Naslov</h2>{{ item.getTitle }}<br />
-                <p>Povzetek:</p><br />{{ item.getSummary }}<br />
-                <p>Datum ustvarjanja:</p>{{ item.getCreationDate|date('d.m.Y H:i:s') }}<br />
-                <a href="{{ path('_singleNews', ({'id': item.getId})) }}" >Več &raquo;</a>
+            <div class="index">
+                <h2>{{ item.getTitle }}</h2>
+                <p>
+                    <strong>{{ item.getSummary }}</strong>
+                </p>
+                <p>
+                    <strong>Datum objave: </strong>{{ item.getPublicationDate|date('d.M.Y') }}
+                </p>
+                <a class="btn"  href="{{ path('_singleNews', ({'id': item.getId})) }}" >Več &raquo;</a>
             </div>
         {% endfor %}
  
-       <div class="novica">
-            <h2>Ankata</h2>
+       <div class="index">
+            <strong>Ankata</strong>
             <p>Text</p>
             <p><a class="btn" href="#">View details &raquo;</a></p>
        </div>
           
-        <div  class="novica">
-            <h2>Povezave, oglasi</h2>
+        <div  class="index">
+            <strong>Povezave, oglasi</strong>
             <p><a href="{{ path('_admin') }}">Admin Module</a></p>
             <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>

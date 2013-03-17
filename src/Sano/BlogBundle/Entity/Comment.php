@@ -9,6 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="comment")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Sano\BlogBundle\Entity\CommentRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Comment
 {
@@ -34,6 +36,13 @@ class Comment
      * @ORM\Column(name="comment", type="text", nullable=false)
      */
     private $comment;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="creation_date", type="datetime")
+     */
+    private $creation_date;
 
     /**
      * @var \Post
@@ -45,7 +54,9 @@ class Comment
      */
     private $post;
 
-
+    public function __construct() {
+        $this->creation_date = new \DateTime('now');
+    }
 
     /**
      * Get id
@@ -124,5 +135,26 @@ class Comment
     public function getPost()
     {
         return $this->post;
+    }
+    /**
+     * Set creation_date
+     *
+     * @param \DateTime $creationDate
+     * @return Post
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
+    
+        return $this;
+    }
+    /**
+     * Get creation_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creation_date;
     }
 }

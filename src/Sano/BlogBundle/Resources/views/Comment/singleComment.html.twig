@@ -1,0 +1,24 @@
+{% extends 'SanoStaticBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+<div class="vsebina">
+    <div id="news">
+        <p><span>Ime:</span>{{ comment.getName }}</p>
+        <p><span>Komentar:</span><br />{{ comment.getComment }}</p>
+        <p><span>Datum ustvarjanja:</span>{{ comment.getCreationDate|date('d.m.Y H:i:s') }}</p>
+        <p>
+            <a href="{{ path('_editComment', ({'id': comment.getId})) }}" ><strong>Uredi</strong></a>
+            <a href="{{ path('_deleteComment', ({'id': comment.getId})) }}" ><strong>Izbriši</strong></a>
+        </p>
+    </div>
+</div>
+
+
+      
+{% endblock %}

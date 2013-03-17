@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="post")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Sano\BlogBundle\Entity\PostRepository")
+ * @ORM\HasLifecycleCallbacks
+ *
  */
 class Post
 {

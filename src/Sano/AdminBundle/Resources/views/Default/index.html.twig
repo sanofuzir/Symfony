@@ -13,7 +13,7 @@
     <div id="admin">
         <h3>Upravljanje z novicami</h3>
         <p>
-            <a href="{{ path('_addNews') }}" ><strong>Dodajanje novic</strong></a>
+            <a href="{{ path('_addNews') }}" ><strong>Dodajanje novih novic</strong></a>
         </p>
         <p>
             <a href="{{ path('_news') }}" ><strong>Seznam in urejanje novic</strong></a>
@@ -21,23 +21,33 @@
         {% render 'SanoNewsBundle:Default:box' with { 'limit': 10 } %}
     </div>
     <div id="admin">
+        <h3>Upravljanje z Blogom</h3>
+        <p>
+            <a href="{{ path('_addPost') }}" ><strong>Dodajanje novih objav</strong></a>
+        </p>
+        <p>
+            <a href="{{ path('_blog') }}" ><strong>Seznam objav in urejanje</strong></a>
+        </p>
+        {% render 'SanoBlogBundle:Default:box' with { 'limit': 10 } %}
+    </div>
+    <div id="admin">
+        <h3>Upravljanje z Komentarji</h3>
+        <p>
+            <a href="{{ path('_comment') }}" ><strong>Seznam Komentarjev in urejanje</strong></a>
+        </p>
+        {% render 'SanoBlogBundle:Comment:box' with { 'limit': 10 } %}
+    </div>
+    <div id="admin">
         <h3>Upravljanje z uporabniki</h3>
         <p>
-            <a href="#" ><strong>Registracija uporabnikov</strong></a>
+            <a href="#" ><strong>Registracija novih uporabnikov</strong></a>
         </p>
         <p>
             <a href="#" ><strong>Seznam in urejanje uporabnikov</strong></a>
         </p>
     </div>
-    <div id="admin">
-        <h3>Upravljanje z Blogom</h3>
-        <p>
-            <a href="{{ path('_addPost') }}" ><strong>Dodajanje objav</strong></a>
-        </p>
-        <p>
-            <a href="{{ path('_blog') }}" ><strong>Seznam objav in urejanje</strong></a>
-        </p>
-    </div>
 </div>
   
 {% endblock %}
+
+

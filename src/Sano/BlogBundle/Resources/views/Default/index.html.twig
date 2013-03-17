@@ -9,7 +9,7 @@
 
 <div class="vsebina">
     <h1>Blog:</h1>
-
+    {% render 'SanoBlogBundle:Default:box' with { 'limit': 10 } %}
     {% for item in post %}
     <div id="news">
         <p><span>Post Title:</span>{{ item.getTitle }}</p>
@@ -19,6 +19,9 @@
             <a href="{{ path('_editPost', ({'id': item.getId})) }}" ><strong>Uredi</strong></a>
             <a href="{{ path('_deletePost', ({'id': item.getId})) }}" ><strong>Izbriši</strong></a>
             <a href="{{ path('_singlePost', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
+            <p>
+                <a href="{{ path('_addComment'), ({'post': item.getId})) }}" ><strong>Komentiraj</strong></a>
+            </p>
         </p>
     </div>
 {% endfor %}

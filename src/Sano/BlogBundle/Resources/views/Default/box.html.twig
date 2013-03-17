@@ -1,0 +1,38 @@
+<div id="box">
+    <h3>Skrinja Objav:</h3>
+
+    {% for item in YearsAndMonths %}
+    <p>
+        <a href="{{ path('_arhivePost', ({'year': item.year, 'month': item.month})) }}" >
+            {% if item.month == 1 %}
+            Januar
+            {% elseif item.month == 2 %}
+            Februar
+            {% elseif item.month == 3 %}
+            Marec
+            {% elseif item.month == 4 %}
+            April
+            {% elseif item.month == 5 %}
+            Maj
+            {% elseif item.month == 6 %}
+            Junij
+            {% elseif item.month == 7 %}
+            Julij
+            {% elseif item.month == 8 %}
+            Avgust
+            {% elseif item.month == 9 %}
+            September
+            {% elseif item.month == 10 %}
+            Oktober
+            {% elseif item.month == 11 %}
+            November
+            {% elseif item.month == 12 %}
+            December
+            {% else %}
+            Napaka!
+            {% endif %}
+            {{item.year}} &raquo;
+        </a>
+    </p>
+    {% endfor %}
+</div>

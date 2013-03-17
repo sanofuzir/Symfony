@@ -3,9 +3,9 @@
 namespace Sano\BlogBundle\Models;
 
 use Doctrine\ORM\EntityManager;
-use Sano\BlogBundle\Entity\Post;
+use Sano\BlogBundle\Entity\Comment;
 
-class PostManager {
+class CommentManager {
 
 	private $class;
 	private $em;
@@ -26,12 +26,12 @@ class PostManager {
      * @return Post
      */
 
-    public function findPost($id)
+    public function findComment($id)
     {
     	return $this->repository->findOneById($id);
     }
 
-    public function savePost($entity) 
+    public function saveComment($entity) 
     {
     	if ($entity instanceof $this->class) {
     		$this->em->persist($entity);
@@ -40,9 +40,9 @@ class PostManager {
     	return $this;
     }
 
-    public function deletePost($id) 
+    public function deleteComment($id) 
     {
-        $entity = $this->findPost($id);
+        $entity = $this->findComment($id);
         
     	if ($entity instanceof $this->class) {
     		$this->em->remove($entity);
@@ -52,10 +52,11 @@ class PostManager {
         return 0;
     }
     /**
-     * @return Post
+     * @return Comment
      */
-    public function createPost()
+    public function createComment($post)
     {
+        //ustvariti morim entiteto, ki ima tuj ključ $post, ki je id posta, ki se komentira
         $class = $this->class;
         $entity = new $class();
 
@@ -66,7 +67,7 @@ class PostManager {
         return $this->repository->getArchive($year, $month);
     }
     /**
-     * @return Post
+     * @return Comment
      */
     public function getYearsAndMonths($limit)
     {

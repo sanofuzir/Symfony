@@ -8,8 +8,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\BlogBundle\Entity\Post;
-use Sano\BlogBundle\Entity\Comment;
-use Sano\BlogBundle\Entity\Image;
 use Sano\BlogBundle\Form\PostForm;
 
 class DefaultController extends Controller
@@ -74,11 +72,11 @@ class DefaultController extends Controller
     public function emailAction($id)
     {    
         $message = \Swift_Message::newInstance()
-        ->setSubject('New news has been added')
+        ->setSubject('New post has been added')
         ->setFrom('send@example.com')
         ->setTo('sano.fuzir@gmail.com')
         ->setBody(
-            $this->render('SanoNewsBundle:Default:email.html.twig',
+            $this->render('SanoBlogBundle:Default:email.html.twig',
                                 array('id' => $id)
                               )
                 );
@@ -112,5 +110,28 @@ class DefaultController extends Controller
             throw new $this->createNotFoundException('No Post found!');
         }
         return array( 'post' => $post );
+    }
+    
+    public function boxAction($limit)
+    {
+        $YearsAndMonths = $this->getPostManager()->getYearsAndMonths($limit);
+        
+        return $this->render('SanoBlogBundle:Default:box.html.twig', 
+                array( 'YearsAndMonths' => $YearsAndMonths )); 
+    }
+    
+    /**
+     * @Route("/{year}/{month}", name="_arhivePost")
+     * @Template()
+     */
+    public function arhiveAction(Request $request, $year=NULL, $month=NULL)
+    {        
+        $post = $this->getPostManager()->getArchive($year, $month);
+
+        return array(
+                     'year' => $year,
+                     'month' => $month,
+                     'post' => $post,
+        );  
     }
 }
