@@ -42,12 +42,13 @@ class CommentController extends Controller
      * @Template()
      */
     
-    public function CommentEditAction(Request $request, $id=NULL, $post=NULL)
+    public function CommentEditAction(Request $request, $id=NULL)
     {
         if ($id!=NULL) {
             $entity = $this->getCommentManager()->findComment($id);            
         } else {
-            $entity = $this->getCommentManager()->createComment($post);
+            $entity = $this->getCommentManager()->createComment();
+                                                
         }
         $form  = $this->createForm(new CommentForm(), $entity);
         if ($request->isMethod('POST')) {

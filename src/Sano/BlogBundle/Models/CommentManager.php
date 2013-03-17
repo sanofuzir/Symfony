@@ -54,9 +54,8 @@ class CommentManager {
     /**
      * @return Comment
      */
-    public function createComment($post)
+    public function createComment()
     {
-        //ustvariti morim entiteto, ki ima tuj ključ $post, ki je id posta, ki se komentira
         $class = $this->class;
         $entity = new $class();
 

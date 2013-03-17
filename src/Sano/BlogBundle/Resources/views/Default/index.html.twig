@@ -20,7 +20,7 @@
             <a href="{{ path('_deletePost', ({'id': item.getId})) }}" ><strong>Izbriši</strong></a>
             <a href="{{ path('_singlePost', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
             <p>
-                <a href="{{ path('_addComment'), ({'post': item.getId})) }}" ><strong>Komentiraj</strong></a>
+                <a href="{{ path('_addComment', ({'post': item.getId})) }}" ><strong>Komentiraj</strong></a>
             </p>
         </p>
     </div>
