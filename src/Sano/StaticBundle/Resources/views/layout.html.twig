@@ -100,26 +100,23 @@
   </head>
 
   <body>
-
+      
     <div class="container">
-
+        <a href="{{ path('_home') }}">
+           <img id="logo" src="{{ asset('bundles/sano/bootstrap/img/logo.gif') }}" alt="Logo"/>
+        </a>
+        <div id="sidemenu">
+            <a href="{{ path('_home') }}">Login</a><br />
+        </div>
       <div class="masthead">
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
+          <ul class="navigation">
                 <li class="active"><a href="{{ path('_home') }}">Domov</a></li>
                 <li><a href="{{ path('_o_meni') }}">O meni</a></li>
                 <li><a href="{{ path('_ponudba') }}">Ponudba</a></li>
                 <li><a href="{{ path('_blog') }}">Blog</a></li>
                 <li><a href="{{ path('_kontakt') }}">Kontakt</a></li>
-                <li><a href="{{ path('_home') }}">Login</a></li>
-              </ul>
-            </div>
-          </div>
-        </div><!-- /.navbar -->
+          </ul>
       </div>
-
     </div> <!-- /container -->
 
 {% for flashMessage in app.session.flashbag.get('notice') %}
@@ -160,6 +157,15 @@
         })
       }(window.jQuery)
     </script>
+    <div id="footer">
+        <div class="container">
+          <hr />
+          <p class="muted credit">Footer text, slika, logo...? 
+              <a href="{{ path('_admin') }}">Admin Toolbar</a>
+          </p>
+        </div>
+    </div>
+
   </body>
 </html>
 

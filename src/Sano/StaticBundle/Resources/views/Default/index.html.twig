@@ -8,31 +8,59 @@
     {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
 
       <div class="vsebina">
+          <div style="margin-top: 30px;">
+              <div class="index_ena">
+              <p>
+                <b>HELLO</b><br />
+                I'm David Trang, a Chicago-based web and interactive designer, with a passion for creating clean, usable & functional websites.
+                <br />
+                Besides enjoying to design websites, I like to occasionally write about creative content and web-related matters.
+              <br />itd...<br />itd...
+              </p>
+              </div>
+              <div class="index_dva">
+                  <p>
+                      LOOKING FOR A DESIGNER?
+                    I embrace new and exciting web projects. Let me know if you'd like to collaborate and work together.
+                    <br />
+                    Connect with me to get started →
+                  </p>
+              </div>
+              <hr />
+          </div>
           
-         {% for item in news %}
-            <div class="index">
-                <h2>{{ item.getTitle }}</h2>
-                <p>
-                    <strong>{{ item.getSummary }}</strong>
-                </p>
-                <p>
-                    <strong>Datum objave: </strong>{{ item.getPublicationDate|date('d.M.Y') }}
-                </p>
-                <a class="btn"  href="{{ path('_singleNews', ({'id': item.getId})) }}" >Več &raquo;</a>
-            </div>
-        {% endfor %}
- 
-       <div class="index">
-            <strong>Ankata</strong>
-            <p>Text</p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
-       </div>
-          
-        <div  class="index">
-            <strong>Povezave, oglasi</strong>
-            <p><a href="{{ path('_admin') }}">Admin Module</a></p>
-            <p><a class="btn" href="#">View details &raquo;</a></p>
+      <div>
+          <div class="index_ena">
+              <p>
+                <b>ABOUT MY WORK</b><br />
+                Since I started working professionally designing interfaces on the web, 
+                I’ve focused on applying usability and accessibility standards for solving 
+                complicated web content issues. I have had the pleasure of working with a wide-variety 
+                of clients ranging from small startups to multi-national corporations over the 
+                course of my professional and freelance career. This site not only serves to 
+                display my own portfolio and personal achievements, but also as a place to share 
+                information and resources that I've found helpful to my work in the design field.
+              </p>
+          </div>
+              <div class="index_dva" style="padding: 50px 0px;">
+                  <p>
+                      CITAT: "trala la la al"
+                  </p>
+              </div>
         </div>
-     </div>
+     
+         <div id="news_index">
+             {% for item in news %}
+                <div class="index">
+                    <h3 class="h3news">{{ item.getTitle }}</h3>
+                    <p>{{ item.getSummary }}</p>
+                    <p>
+                        <strong>Datum objave: </strong>{{ item.getPublicationDate|date('d.M.Y') }}
+                    </p>
+                    <a class="btn"  href="{{ path('_singleNews', ({'id': item.getId})) }}" >Več &raquo;</a>
+                </div>
+            {% endfor %}
+         </div>
+    </div>
       
 {% endblock %}
