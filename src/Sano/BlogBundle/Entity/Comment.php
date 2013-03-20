@@ -120,7 +120,7 @@ class Comment
      * @param \Sano\BlogBundle\Entity\Post $post
      * @return Comment
      */
-    public function setPost(\Sano\BlogBundle\Entity\Post $post = null)
+    public function setPost(\Sano\BlogBundle\Entity\Post $post)
     {
         $this->post = $post;
     

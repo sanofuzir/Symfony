@@ -14,9 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class News
 {
-    const STATUS_DRAFT = 'DRAFT';
-    const STATUS_ACTIVE = 'ACTIVE';
-    const DEFAULT_STATUS = 'DRAFT';
+    const STATUS_DRAFT = 'Draft';
+    const STATUS_ACTIVE = 'Active';
+    const DEFAULT_STATUS = 'Draft';
     
     /**
      * @var array
@@ -91,7 +91,8 @@ class News
     
     public function __construct() {
         $this->creation_date = new \DateTime('now');
-        $this->status = self::STATUS_DRAFT;
+        $this->publication_date = new \DateTime('now');
+        $this->status = self::STATUS_ACTIVE;
     }
 
         /**
@@ -229,20 +230,6 @@ class News
     public function getEditingDate()
     {
         return $this->editing_date;
-    }
-
-    /**
-     * Set publication_date
-     *
-     * @param \DateTime $publicationDate
-     * @return News
-     * @ORM\PreUpdate
-     */
-    public function setPublicationDate()
-    {
-        $this->publication_date = new \DateTime('now');
-    
-        return $this;
     }
 
     /**

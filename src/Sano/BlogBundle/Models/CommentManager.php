@@ -22,6 +22,11 @@ class CommentManager {
     {
     	return $this->repository->findAll();
     }
+    public function findAllByPost($id)
+    {
+        return $this->repository->findAllByPost($id);
+    }
+
     /**
      * @return Post
      */
@@ -71,5 +76,5 @@ class CommentManager {
     public function getYearsAndMonths($limit)
     {
     	return $this->repository->getYearsAndMonths($limit);
-    }
+    }    
 }

@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\BlogBundle\Entity\Post;
+use Sano\BlogBundle\Entity\Comment;
 use Sano\BlogBundle\Form\PostForm;
 
 class DefaultController extends Controller
@@ -20,6 +21,13 @@ class DefaultController extends Controller
     private function getPostManager()
     {
         return $this->container->get('sano.post_manager');
+    }
+    /**
+     * @return CommentManager
+     */
+    private function getCommentManager()
+    {
+        return $this->container->get('sano.comment_manager');
     }
     
     /**
@@ -105,11 +113,14 @@ class DefaultController extends Controller
     public function singlePostAction($id)
     {
         $post = $this->getPostManager()->findPost($id);
+        $comment = $this->getCommentManager()->findAllByPost($id);
         
         if (!$post) {
             throw new $this->createNotFoundException('No Post found!');
         }
-        return array( 'post' => $post );
+        return array( 'post' => $post,
+                      'comment' => $comment,
+                    );
     }
     
     public function boxAction($limit)

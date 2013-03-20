@@ -23,7 +23,7 @@ class NewsRepository extends EntityRepository
     {
         return $this->getEntityManager()
                     ->createQuery("SELECT n FROM SanoNewsBundle:news n 
-                                    WHERE n.status = 'active'
+                                    WHERE n.status = 'Active'
                                     ORDER BY n.creation_date DESC")
                     ->setMaxResults($limit)
                     ->getResult();

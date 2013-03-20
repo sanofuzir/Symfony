@@ -44,5 +44,15 @@ class CommentRepository extends EntityRepository
                      ->setMaxResults($limit)
                      ->getResult();
     }
-
+    public function findAllByPost($id)
+    {
+        return $this->getEntityManager()
+                     ->createQuery("SELECT c FROM SanoBlogBundle:comment c
+                                            WHERE c.post = :post
+                                            ORDER BY c.creation_date ASC")
+                     ->setParameters(array(
+                                     'post' => $id
+                                     ))
+                     ->getResult();
+    }
 }

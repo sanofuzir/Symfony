@@ -9,13 +9,20 @@
 
 <div class="vsebina">
     <div id="news">
-        <p><span>Naslov:</span>{{ post.getTitle }}</p>
-        <p><span>Text:</span><br />{{ post.getText }}</p>
+        <h3><strong>{{ post.getTitle }}</strong></h3>
+        <p>{{ post.getText }}</p>
         <p><span>Datum ustvarjanja:</span>{{ post.getCreationDate|date('d.m.Y H:i:s') }}</p>
-        <p>Komentarji:</p>
+        <p><strong>Komentarji:</strong></p>
+        <hr />
     </div>
+    {% for item in comment %}
+    <div id="comment">
+        <p><strong>{{ item.getName }}</strong></p>
+        <p>{{ item.getComment }}</p>
+        <p>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
+    </div>
+    {% endfor %}
+    <a href="{{ path('_addComment', ({'id': post.getId})) }}" ><strong>Komentiraj</strong></a>
 </div>
 
-
-      
 {% endblock %}

@@ -9,20 +9,18 @@
 
 <div class="vsebina">
     <h1>Blog:</h1>
-    {% render 'SanoBlogBundle:Default:box' with { 'limit': 10 } %}
+    <div style="float: right; background-color: #BBBBBB; padding: 30px; ">
+        {% render 'SanoBlogBundle:Default:box' with { 'limit': 10 } %}
+    </div>
+    
     {% for item in post %}
     <div id="news">
-        <p><span>Post Title:</span>{{ item.getTitle }}</p>
-        <p><span>Text:</span><br />{{ item.getText }}</p>
-        <p><span>Creation Date:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
+        <h3>{{ item.getTitle }}</h3>
+        <p><span>{{ item.getText }}</span></p>
+        <p><span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</span></p>
         <p>
-            <a href="{{ path('_editPost', ({'id': item.getId})) }}" ><strong>Uredi</strong></a>
-            <a href="{{ path('_deletePost', ({'id': item.getId})) }}" ><strong>Izbriši</strong></a>
-            <a href="{{ path('_singlePost', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
-            <p>
-                <a href="{{ path('_addComment', ({'post': item.getId})) }}" ><strong>Komentiraj</strong></a>
-            </p>
-        </p>
+          <a href="{{ path('_singlePost', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
+          <hr />
     </div>
 {% endfor %}
 </div>

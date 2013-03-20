@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\BlogBundle\Entity\Comment;
+use Sano\BlogBundle\Entity\Post;
 use Sano\BlogBundle\Form\CommentForm;
 
 class CommentController extends Controller
@@ -20,6 +21,13 @@ class CommentController extends Controller
     private function getCommentManager()
     {
         return $this->container->get('sano.comment_manager');
+    }
+    /**
+     * @return PostManager
+     */
+    private function getPostManager()
+    {
+        return $this->container->get('sano.post_manager');
     }
     
     /**
@@ -38,18 +46,13 @@ class CommentController extends Controller
     
     /**
      * @Route("/comment/edit/{id}", name="_editComment")
-     * @Route("/comment/add", name="_addComment")
      * @Template()
      */
     
-    public function CommentEditAction(Request $request, $id=NULL)
+    public function CommentEditAction(Request $request, $id)
     {
-        if ($id!=NULL) {
-            $entity = $this->getCommentManager()->findComment($id);            
-        } else {
-            $entity = $this->getCommentManager()->createComment();
-                                                
-        }
+        $entity = $this->getCommentManager()->findComment($id);            
+
         $form  = $this->createForm(new CommentForm(), $entity);
         if ($request->isMethod('POST')) {
             $form->bind($request);
@@ -57,12 +60,10 @@ class CommentController extends Controller
                 
                 $this->getCommentManager()->saveComment($entity);
                 $this->emailAction($id);
-                if ($id) {
-                   $this->get('session')->setFlash('notice', 'Comment was edited!');
-                } else {
-                    $this->get('session')->setFlash('notice', 'Comment was added!');
-                }
-                return $this->redirect($this->generateUrl('_comment'));
+
+                $this->get('session')->setFlash('notice', 'Comment was edited!');
+
+                return $this->redirect($this->generateUrl('_blog'));
             }
         }
 
@@ -71,6 +72,38 @@ class CommentController extends Controller
                      'id'     => $id,
         );  
     }
+    
+    /**
+     * @Route("/comment/add/post/{id}", name="_addComment")
+     * @Template()
+     */
+    
+    public function CommentAddAction(Request $request, $id)
+    {
+        $comment = $this->getCommentManager()->createComment();
+        $post = $this->getPostManager()->findPost($id);
+        
+        $form  = $this->createForm(new CommentForm(), $comment);
+        if ($request->isMethod('POST')) {
+            $form->bind($request);
+            if ($form->isValid()) {
+                $comment->setPost($post);
+                
+                $this->getCommentManager()->saveComment($comment);
+                $this->getPostManager()->savePost($post);
+                $this->emailAction($id);
+                
+                $this->get('session')->setFlash('notice', 'Comment was added!');
+
+                return $this->redirect($this->generateUrl('_blog'));
+            }
+        }
+        return array(
+                     'form'   => $form->createView(),
+                     'id'     => $id,
+        );  
+    }
+    
     public function emailAction($id)
     {    
         $message = \Swift_Message::newInstance()
