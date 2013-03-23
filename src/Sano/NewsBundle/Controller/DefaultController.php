@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\NewsBundle\Entity\News;
 use Sano\NewsBundle\Form\NewsForm;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -29,10 +30,6 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $news = $this->getNewsManager()->findAll();
-
-        if (!$news) {
-            throw new $this->createNotFoundException('No News found!');
-        }
         
         return array( 'news' => $news);
     }
@@ -95,7 +92,7 @@ class DefaultController extends Controller
         $news = $this->getNewsManager()->findNews($id);
         
         if (!$news) {
-            throw new $this->createNotFoundException('No News found!');
+            throw new NotFoundHttpException('No News found!');
         }
         return array( 'news' => $news );
     }
