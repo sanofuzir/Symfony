@@ -10,7 +10,7 @@
 <div class="vsebina">
     <h1>Blog:</h1>
     <div style="float: right; background-color: #BBBBBB; padding: 30px; ">
-        {% render 'SanoBlogBundle:Default:box' with { 'limit': 10 } %}
+        {{ render(controller('SanoBlogBundle:Default:box', { 'limit': 12 })) }}
     </div>
     
     {% for item in post %}

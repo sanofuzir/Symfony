@@ -8,7 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Sano\NewsBundle\Entity\News;
-use Sano\NewsBundle\Form\NewsForm;
+use Sano\NewsBundle\Form\NewsType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
@@ -61,7 +61,7 @@ class DefaultController extends Controller
         } else {
             $entity = $this->getNewsManager()->createNews();
         }
-        $form  = $this->createForm(new NewsForm(), $entity);
+        $form  = $this->createForm(new NewsType(), $entity);
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {

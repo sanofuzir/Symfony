@@ -16,7 +16,7 @@
         <p>
             <a href="{{ path('_news') }}" ><strong>Seznam in urejanje novic</strong></a>
         </p>
-        {% render 'SanoNewsBundle:Default:box' with { 'limit': 10 } %}
+        {{ render(controller('SanoNewsBundle:Default:box', { 'limit': 12 })) }}
     </div>
     <div id="admin">
         <h3>Upravljanje z Blogom</h3>
@@ -26,14 +26,14 @@
         <p>
             <a href="{{ path('_blog') }}" ><strong>Seznam objav in urejanje</strong></a>
         </p>
-        {% render 'SanoBlogBundle:Default:box' with { 'limit': 10 } %}
+        {{ render(controller('SanoBlogBundle:Default:box', { 'limit': 12 })) }}
     </div>
     <div id="admin">
         <h3>Upravljanje z Komentarji</h3>
         <p>
             <a href="{{ path('_comment') }}" ><strong>Seznam Komentarjev in urejanje</strong></a>
         </p>
-        {% render 'SanoBlogBundle:Comment:box' with { 'limit': 10 } %}
+        {{ render(controller('SanoBlogBundle:Comment:box', { 'limit': 12 })) }}
     </div>
     <div id="admin">
         <h3>Upravljanje z uporabniki</h3>

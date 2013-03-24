@@ -3,6 +3,7 @@
 namespace Sano\NewsBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * News
@@ -41,10 +42,16 @@ class News
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
+    * @var string
+    *
+    * @ORM\Column(name="title", type="string", length=255)
+    * @Assert\NotBlank(message="to polje ne sme biti prazno")
+    * @Assert\MinLength(
+    * limit=3,
+    * message="Your title must have at least {{ limit }} characters."
+    * )
+    * 
+    */
     private $title;
     
     /**

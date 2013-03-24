@@ -9,7 +9,7 @@
 
 <div class="vsebina">
     <h1>Komentarji:</h1>
-    {% render 'SanoBlogBundle:Comment:box' with { 'limit': 10 } %}
+    {{ render(controller('SanoBlogBundle:Comment:box', { 'limit': 12 })) }}
     {% for item in comment %}
     <div id="news">
         <p><span>Ime:</span>{{ item.getName }}</p>
