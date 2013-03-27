@@ -61,10 +61,10 @@ class DefaultController extends Controller
         $form  = $this->createForm(new PostForm(), $entity);
         if ($request->isMethod('POST')) {
             $form->bind($request);
-            if ($form->isValid()) {
-                
+            if ($form->isValid()) { 
                 $this->getPostManager()->savePost($entity);
-                $this->emailAction($id);
+                $dispatcher = new EventDispatcher();
+                $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
                 if ($id) {
                    $this->get('session')->setFlash('notice', 'Post was edited!');
                 } else {
@@ -78,19 +78,6 @@ class DefaultController extends Controller
                      'form'   => $form->createView(),
                      'id'     => $id,
         );  
-    }
-    public function emailAction($id)
-    {    
-        $message = \Swift_Message::newInstance()
-        ->setSubject('New post has been added')
-        ->setFrom('send@example.com')
-        ->setTo('sano.fuzir@gmail.com')
-        ->setBody(
-            $this->render('SanoBlogBundle:Default:email.html.twig',
-                                array('id' => $id)
-                              )
-                );
-        $this->get('mailer')->send($message);
     }
     
     /**

@@ -67,7 +67,6 @@ class DefaultController extends Controller
         if ($request->isMethod('POST')) {
             $form->bind($request);
             if ($form->isValid()) {
-                
                 $this->getNewsManager()->saveNews($entity);
                 $dispatcher = new EventDispatcher();
                 $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));

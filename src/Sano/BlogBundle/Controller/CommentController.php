@@ -61,7 +61,8 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 
                 $this->getCommentManager()->saveComment($entity);
-                $this->emailAction($id);
+                $dispatcher = new EventDispatcher();
+                $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
 
                 $this->get('session')->setFlash('notice', 'Comment was edited!');
 
@@ -93,7 +94,8 @@ class CommentController extends Controller
                 
                 $this->getCommentManager()->saveComment($comment);
                 $this->getPostManager()->savePost($post);
-                $this->emailAction($id);
+                $dispatcher = new EventDispatcher();
+                $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
                 
                 $this->get('session')->setFlash('notice', 'Comment was added!');
 
@@ -105,21 +107,7 @@ class CommentController extends Controller
                      'id'     => $id,
         );  
     }
-    
-    public function emailAction($id)
-    {    
-        $message = \Swift_Message::newInstance()
-        ->setSubject('New Comment has been added')
-        ->setFrom('send@example.com')
-        ->setTo('sano.fuzir@gmail.com')
-        ->setBody(
-            $this->render('SanoBlogBundle:Comment:email.html.twig',
-                                array('id' => $id)
-                              )
-                );
-        $this->get('mailer')->send($message);
-    }
-    
+
     /**
      * @Route("Comment/delete/{id}", name="_deleteComment", requirements={"id" = "\d{1,4}"}) 
      */

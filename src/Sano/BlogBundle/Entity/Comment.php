@@ -30,7 +30,7 @@ class Comment
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
      * @Assert\NotBlank(message="to polje ne sme biti prazno")
      * @Assert\MinLength(
-     * limit=1,
+     * limit=3,
      * message="Your title must have at least {{ limit }} characters!")
      * @Assert\MaxLength(
      * limit=100,
