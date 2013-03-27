@@ -38,7 +38,7 @@ class PostRepository extends EntityRepository
     public function getYearsAndMonths($limit)
     {
          return $this->getEntityManager()
-                     ->createQuery("SELECT YEAR(p.creation_date) AS year, MONTH(p.creation_date) AS month, p.creation_date AS creation_date
+                     ->createQuery("SELECT YEAR(p.creation_date) AS year, DATE_FORMAT(p.creation_date, '%M') AS month, p.creation_date AS creation_date
                                     FROM SanoBlogBundle:post p  
                                     GROUP BY year, month")
                      ->setMaxResults($limit)

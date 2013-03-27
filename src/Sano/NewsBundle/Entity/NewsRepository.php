@@ -50,7 +50,7 @@ class NewsRepository extends EntityRepository
     public function getYearsAndMonths($limit)
     {
          return $this->getEntityManager()
-                     ->createQuery("SELECT YEAR(n.creation_date) AS year, MONTH(n.creation_date) AS month, n.creation_date AS creation_date
+                     ->createQuery("SELECT YEAR(n.creation_date) AS year, DATE_FORMAT(n.creation_date, '%M') AS month
                                     FROM SanoNewsBundle:news n  
                                     GROUP BY year, month")
                      ->setMaxResults($limit)

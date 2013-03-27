@@ -8,6 +8,7 @@
     <parameters>
         <parameter key="sano.entity.news.class">Sano\NewsBundle\Entity\News</parameter>
         <parameter key="sano.news_manager.class">Sano\NewsBundle\Models\NewsManager</parameter>
+        <parameter key="sano.listener.news_save.class">Sano\NewsBundle\EventListener\NewsNotificationListener</parameter>
     </parameters>
 
     <services>
@@ -19,10 +20,14 @@
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
             <argument type="service" id="twig.extension.sano.demo" />
         </service>
-
         <service id="sano.news_manager" class="%sano.news_manager.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%sano.entity.news.class%</argument>
+        </service>
+        
+        <service id="sano.listener.save_listener" class="%sano.listener.news_save.class%">
+            <argument type="service" id="mailer" />
+            <tag name="kernel.event_listener" event="sano.news.news_saved" method="onNewsSave" />
         </service>
     </services>
     

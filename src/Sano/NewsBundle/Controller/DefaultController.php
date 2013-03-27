@@ -67,8 +67,9 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 
                 $this->getNewsManager()->saveNews($entity);
-                $this->emailAction($id);
                 if ($id) {
+                   $dispatcher = $this->get('event_dispatcer');
+                   $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
                    $this->get('session')->setFlash('notice', 'News was edited!');
                 } else {
                     $this->get('session')->setFlash('notice', 'News was added!');
@@ -118,18 +119,5 @@ class DefaultController extends Controller
         
         return $this->render('SanoNewsBundle:Default:box.html.twig', 
                 array( 'YearsAndMonths' => $YearsAndMonths )); 
-    }
-    public function emailAction($id)
-    {    
-        $message = \Swift_Message::newInstance()
-        ->setSubject('New news has been added')
-        ->setFrom('send@example.com')
-        ->setTo('sano.fuzir@gmail.com')
-        ->setBody(
-            $this->render('SanoNewsBundle:Default:email.html.twig',
-                                array('id' => $id)
-                              )
-                );
-        $this->get('mailer')->send($message);
     }
 }

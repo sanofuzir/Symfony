@@ -38,7 +38,7 @@ class CommentRepository extends EntityRepository
     public function getYearsAndMonths($limit)
     {
          return $this->getEntityManager()
-                     ->createQuery("SELECT YEAR(c.creation_date) AS year, MONTH(c.creation_date) AS month, c.creation_date AS creation_date
+                     ->createQuery("SELECT YEAR(c.creation_date) AS year, DATE_FORMAT(c.creation_date, '%M') AS month, c.creation_date AS creation_date
                                     FROM SanoBlogBundle:comment c  
                                     GROUP BY year, month")
                      ->setMaxResults($limit)

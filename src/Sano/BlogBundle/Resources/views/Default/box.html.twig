@@ -4,7 +4,7 @@
     {% for item in YearsAndMonths %}
     <p>
         <a href="{{ path('_arhivePost', ({'year': item.year, 'month': item.month})) }}" >
-            {{ item.creation_date|date("M") }}, {{item.year}} &raquo;
+            {{ item.month}}, {{item.year}} &raquo;
         </a>
     </p>
     {% endfor %}

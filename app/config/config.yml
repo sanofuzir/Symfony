@@ -56,6 +56,7 @@ doctrine:
                     datetime_functions:
                         YEAR: Sano\NewsBundle\DQL\Year
                         MONTH: Sano\NewsBundle\DQL\Month
+                        DATE_FORMAT: Sano\NewsBundle\DQL\DateFormat
 
 # Swiftmailer Configuration
 swiftmailer:
