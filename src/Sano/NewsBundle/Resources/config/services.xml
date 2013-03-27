@@ -23,8 +23,7 @@
         <service id="sano.news_manager" class="%sano.news_manager.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument>%sano.entity.news.class%</argument>
-        </service>
-        
+        </service>        
         <service id="sano.listener.save_listener" class="%sano.listener.news_save.class%">
             <argument type="service" id="mailer" />
             <tag name="kernel.event_listener" event="sano.news.news_saved" method="onNewsSave" />

@@ -67,9 +67,9 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 
                 $this->getNewsManager()->saveNews($entity);
+                $dispatcher = $this->get('event_dispatcer');
+                $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
                 if ($id) {
-                   $dispatcher = $this->get('event_dispatcer');
-                   $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
                    $this->get('session')->setFlash('notice', 'News was edited!');
                 } else {
                     $this->get('session')->setFlash('notice', 'News was added!');

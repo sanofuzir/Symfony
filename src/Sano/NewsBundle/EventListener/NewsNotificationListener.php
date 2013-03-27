@@ -12,7 +12,7 @@ class NewsNotificationListener {
     }
     
     public function onNewsSave(Event $event)
-    {
+    {   
         $news = $event->getNewsItem();
         
         $message = \Swift_Message::newInstance()
