@@ -82,9 +82,6 @@ class News
      *
      * @ORM\Column(name="status", type="text", nullable=false)
      * @Assert\NotBlank(message="to polje ne sme biti prazno")
-     * @Assert\MinLength(
-     * limit=10,
-     * message="Your title must have at least {{ limit }} characters!")
      */
     private $status;
     

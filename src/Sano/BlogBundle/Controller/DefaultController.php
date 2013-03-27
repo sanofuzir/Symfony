@@ -12,6 +12,7 @@ use Sano\BlogBundle\Entity\Comment;
 use Sano\BlogBundle\Form\PostForm;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\EventDispatcher\EventDispatcher;
+use Sano\BlogBundle\Event\PostEvent;
 
 class DefaultController extends Controller
 {
@@ -64,7 +65,7 @@ class DefaultController extends Controller
             if ($form->isValid()) { 
                 $this->getPostManager()->savePost($entity);
                 $dispatcher = new EventDispatcher();
-                $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
+                $dispatcher->dispatch('sano.news.news_saved', new PostEvent($entity));
                 if ($id) {
                    $this->get('session')->setFlash('notice', 'Post was edited!');
                 } else {

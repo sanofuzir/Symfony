@@ -25,23 +25,23 @@ class Post
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255, nullable=false)
-     * @Assert\NotBlank(message="to polje ne sme biti prazno")
-     * @Assert\MinLength(
-     * limit=3,
-     * message="Your title must have at least {{ limit }} characters!")
-     * @Assert\MaxLength(
-     * limit=100,
-     * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
-     */
+    * @var string
+    *
+    * @ORM\Column(name="title", type="string", length=255)
+    * @Assert\NotBlank(message="to polje ne sme biti prazno")
+    * @Assert\MinLength(
+    * limit=3,
+    * message="Your title must have at least {{ limit }} characters!")
+    * @Assert\MaxLength(
+    * limit=100,
+    * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
+    */
     private $title;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="text", type="text", nullable=false)
+     * @ORM\Column(name="text", type="text")
      * @Assert\NotBlank(message="to polje ne sme biti prazno")
      * @Assert\MinLength(
      * limit=1,
