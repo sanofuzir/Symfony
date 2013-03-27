@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sano\NewsBundle\Entity\News;
 use Sano\NewsBundle\Form\NewsType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+use Sano\NewsBundle\Event\NewsEvent;
 
 class DefaultController extends Controller
 {
@@ -67,7 +69,7 @@ class DefaultController extends Controller
             if ($form->isValid()) {
                 
                 $this->getNewsManager()->saveNews($entity);
-                $dispatcher = $this->get('event_dispatcer');
+                $dispatcher = new EventDispatcher();
                 $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
                 if ($id) {
                    $this->get('session')->setFlash('notice', 'News was edited!');

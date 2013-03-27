@@ -3,6 +3,7 @@
 namespace Sano\NewsBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
+use Sano\NewsBundle\Entity\News;
 
 class NewsEvent extends event {
     

@@ -1,4 +1,5 @@
 <?php
+
 namespace Sano\NewsBundle\EventListener;
 
 use Symfony\Component\EventDispatcher\Event;
@@ -7,7 +8,7 @@ class NewsNotificationListener {
     
     protected $mailer;
     
-    public function __construct(Swift_Mailer $mailer) {
+    public function __construct(\Swift_Mailer $mailer) {
         $this->mailer = $mailer;
     }
     
@@ -17,7 +18,7 @@ class NewsNotificationListener {
         
         $message = \Swift_Message::newInstance()
             ->setSubject('New news has been added')
-            ->setFrom('send@example.com')
+            ->setFrom('sano.fuzir@gmail.com')
             ->setTo('sano.fuzir@gmail.com')
             ->setBody(
                 $this->render('SanoNewsBundle:Default:email.html.twig',
