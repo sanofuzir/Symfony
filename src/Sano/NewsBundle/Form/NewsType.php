@@ -12,7 +12,7 @@ class NewsType extends AbstractType
     {
         $builder->add('title', null, array(
                 'attr' => array(
-                    'placeholder'=>"Your news title..."
+                    'placeholder'=>"Vnesi naslov"
                 ),
                 'label' => 'Naslov'
             ));
@@ -21,10 +21,10 @@ class NewsType extends AbstractType
                     'cols' => 40,
                     'rows' => 10
                 ),
-                'label' => 'Povzetek'
+                'label' => 'Povzetek novice'
             ));
         $builder->add('text', 'textarea', array(
-                'label' => 'Besedilo'
+                'label' => 'Besedilo Novice'
             ));
         $builder->add('status', 'choice', array(
                       'choices' => array('active' => 'Active', 

@@ -48,9 +48,10 @@ class News
     * @Assert\NotBlank(message="to polje ne sme biti prazno")
     * @Assert\MinLength(
     * limit=3,
-    * message="Your title must have at least {{ limit }} characters."
-    * )
-    * 
+    * message="Your title must have at least {{ limit }} characters!")
+    * @Assert\MaxLength(
+    * limit=100,
+    * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
     */
     private $title;
     
@@ -58,6 +59,10 @@ class News
      * @var string
      *
      * @ORM\Column(name="summary", type="text")
+     * @Assert\NotBlank(message="to polje ne sme biti prazno")
+     * @Assert\MinLength(
+     * limit=3,
+     * message="Your title must have at least {{ limit }} characters!")
      */
     private $summary;
 
@@ -65,6 +70,10 @@ class News
      * @var string
      *
      * @ORM\Column(name="text", type="text")
+     * @Assert\NotBlank(message="to polje ne sme biti prazno")
+     * @Assert\MinLength(
+     * limit=5,
+     * message="Your title must have at least {{ limit }} characters!")
      */
     private $text;
     
@@ -72,6 +81,10 @@ class News
      * @var string
      *
      * @ORM\Column(name="status", type="text", nullable=false)
+     * @Assert\NotBlank(message="to polje ne sme biti prazno")
+     * @Assert\MinLength(
+     * limit=10,
+     * message="Your title must have at least {{ limit }} characters!")
      */
     private $status;
     

@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Sano\BlogBundle\Entity\Post;
 use Sano\BlogBundle\Entity\Comment;
 use Sano\BlogBundle\Form\PostForm;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 class DefaultController extends Controller
 {

@@ -3,6 +3,7 @@
 namespace Sano\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Comment
@@ -27,6 +28,13 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     * @Assert\NotBlank(message="to polje ne sme biti prazno")
+     * @Assert\MinLength(
+     * limit=1,
+     * message="Your title must have at least {{ limit }} characters!")
+     * @Assert\MaxLength(
+     * limit=100,
+     * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
      */
     private $name;
 
@@ -34,6 +42,10 @@ class Comment
      * @var string
      *
      * @ORM\Column(name="comment", type="text", nullable=false)
+     * @Assert\NotBlank(message="to polje ne sme biti prazno")
+     * @Assert\MinLength(
+     * limit=1,
+     * message="Your title must have at least {{ limit }} characters!")
      */
     private $comment;
     

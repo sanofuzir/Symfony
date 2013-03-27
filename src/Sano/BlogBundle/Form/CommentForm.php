@@ -4,7 +4,7 @@ namespace Sano\BlogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use sano\BlogBundle\Entity\Comment;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class CommentForm extends AbstractType
 {
@@ -19,6 +19,12 @@ class CommentForm extends AbstractType
         $builder->add('comment', 'textarea', array(
                 'label' => 'Besedilo'
             ));
+    }
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Sano\BlogBundle\Entity\Comment'
+        ));
     }
 
     public function getName()

@@ -4,7 +4,7 @@ namespace Sano\BlogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use sano\BlogBundle\Entity\Post;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class PostForm extends AbstractType
 {
@@ -12,7 +12,7 @@ class PostForm extends AbstractType
     {
         $builder->add('title', null, array(
                 'attr' => array(
-                    'placeholder'=>"Your post title..."
+                    'placeholder'=>"Naslov objave"
                 ),
                 'label' => 'Naslov'
             ));
@@ -20,9 +20,15 @@ class PostForm extends AbstractType
                 'label' => 'Besedilo'
             ));
     }
-
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'Sano\BlogBundle\Entity\Post'
+        ));
+    }
+    
     public function getName()
     {
-        return 'contact';
+        return 'sano_blogbundle_postform';
     }
 }
