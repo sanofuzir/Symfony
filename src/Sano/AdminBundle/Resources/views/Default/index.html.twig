@@ -8,6 +8,16 @@
 <div class="vsebina">
     <h1>Admin Control Panel</h1>
     <hr />
+    <div>
+        <h3>Upravljanje z uporabniki</h3>
+        <p>
+            <a href="#" ><strong>Registracija novih uporabnikov</strong></a>
+        </p>
+        <p>
+            <a href="#" ><strong>Seznam in urejanje uporabnikov</strong></a>
+        </p>
+    </div>
+    <hr />
     <div id="admin">
         <h3>Upravljanje z novicami</h3>
         <p>
@@ -35,15 +45,7 @@
         </p>
         {{ render(controller('SanoBlogBundle:Comment:box', { 'limit': 12 })) }}
     </div>
-    <div id="admin">
-        <h3>Upravljanje z uporabniki</h3>
-        <p>
-            <a href="#" ><strong>Registracija novih uporabnikov</strong></a>
-        </p>
-        <p>
-            <a href="#" ><strong>Seznam in urejanje uporabnikov</strong></a>
-        </p>
-    </div>
+    
     <p style="margin-top: 250px;"></p>
 </div>
   
