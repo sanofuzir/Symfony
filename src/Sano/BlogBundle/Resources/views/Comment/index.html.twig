@@ -15,6 +15,8 @@
         <p><span>Ime:</span>{{ item.getName }}</p>
         <p><span>Komentar:</span><br />{{ item.getComment }}</p>
         <p><span>Creation Date:</span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</p>
+        <a href="{{ path('_editComment', ({'id': item.getId})) }}" ><strong>Uredi</strong></a>
+        <a href="{{ path('_deleteComment', ({'id': item.getId})) }}" ><strong>Izbriši</strong></a>
     </div>
 {% endfor %}
 </div>

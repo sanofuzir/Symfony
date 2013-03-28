@@ -9,7 +9,7 @@
  
 <div class="vsebina">
     <h1>Uredi komentar</h1>
-    <form action="{{ path('_editComment', {'id': id}) }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ path('_editComment', {'id': id}) }}" method="post" {{ form_enctype(form) }} novalidate>
 
     {{ form_widget(form) }}
     <input type="submit" />

@@ -71,7 +71,7 @@ class DefaultController extends Controller
                 } else {
                     $this->get('session')->setFlash('notice', 'Post was added!');
                 }
-                return $this->redirect($this->generateUrl('_blog'));
+                return $this->redirect($this->generateUrl('_AdminBlog'));
             }
         }
 
@@ -93,7 +93,7 @@ class DefaultController extends Controller
             $this->getPostManager()->deletePost($SinglePost);
             $this->get('session')->setFlash('notice', 'Objava Izbrisana!');
         }
-        return $this->redirect($this->generateUrl('_blog'));
+        return $this->redirect($this->generateUrl('_AdminBlog'));
     }
     
     /**

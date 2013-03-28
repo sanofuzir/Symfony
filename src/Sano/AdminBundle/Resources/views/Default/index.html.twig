@@ -1,4 +1,4 @@
-{% extends 'SanoStaticBundle::layout.html.twig' %}
+{% extends 'SanoAdminBundle::layout.html.twig' %}
 
 {% block content_header '' %}
 
@@ -24,7 +24,7 @@
             <a href="{{ path('_addPost') }}" ><strong>Dodajanje novih objav</strong></a>
         </p>
         <p>
-            <a href="{{ path('_blog') }}" ><strong>Seznam objav in urejanje</strong></a>
+            <a href="{{ path('_AdminBlog') }}" ><strong>Seznam objav in urejanje</strong></a>
         </p>
         {{ render(controller('SanoBlogBundle:Default:box', { 'limit': 12 })) }}
     </div>

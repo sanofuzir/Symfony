@@ -81,7 +81,6 @@ class News
      * @var string
      *
      * @ORM\Column(name="status", type="text", nullable=false)
-     * @Assert\NotBlank(message="to polje ne sme biti prazno")
      */
     private $status;
     

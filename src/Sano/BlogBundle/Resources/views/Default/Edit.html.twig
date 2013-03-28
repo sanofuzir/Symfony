@@ -9,7 +9,8 @@
  
 <div class="vsebina">
     <h1>Admin urejanje objav</h1>
-    <form action="{{ id ? path('_editPost', {'id': id}) : path('_addPost') }}" method="post" {{ form_enctype(form) }}>
+    <form action="{{ id ? path('_editPost', {'id': id}) : path('_addPost') }}" 
+          method="post" {{ form_enctype(form) }} novalidate>
 
     {{ form_widget(form) }}
     <input type="submit" />

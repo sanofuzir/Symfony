@@ -1,0 +1,30 @@
+{% extends 'SanoStaticBundle::layout.html.twig' %}
+
+{% block title %}Symfony - Welcome{% endblock %}
+
+{% block content_header '' %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+<div class="vsebina">
+    <h1>Blog:</h1>
+    <div style="float: right; background-color: #BBBBBB; padding: 30px; ">
+        {{ render(controller('SanoBlogBundle:Default:box', { 'limit': 12 })) }}
+    </div>
+    
+    {% for item in post %}
+    <div id="news">
+        <h3>{{ item.getTitle }}</h3>
+        <p><span>{{ item.getText }}</span></p>
+        <p><span>{{ item.getCreationDate|date('d.m.Y H:i:s') }}</span></p>
+        <p>
+          <a href="{{ path('_singlePost', ({'id': item.getId})) }}" >Podrobno &raquo;</a>
+          <a href="{{ path('_editPost', ({'id': item.getId})) }}" ><strong>Uredi</strong></a>
+          <a href="{{ path('_deletePost', ({'id': item.getId})) }}" ><strong>Izbriši</strong></a>
+          <hr />
+    </div>
+{% endfor %}
+</div>
+  
+{% endblock %}

@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="sl">
+  <head>
+    <meta charset="utf-8">
+    <title>Sano Fužir</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <script type="text/javascript">
+        //tinyMCE.init({mode : "textareas"}); //to odkomenitraj da deluje
+    </script>
+    <!-- Le styles -->
+    
+    <link href="{{ asset('bundles/sanostatic/css/bootstrap.css') }}" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 60px;
+        background-color: #F8C0C0;
+      }
+
+      /* Custom container */
+      .container {
+        margin: 0 auto;
+        max-width: 1000px;
+      }
+      .container > hr {
+        margin: 60px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 80px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 100px;
+        line-height: 1;
+      }
+      .jumbotron .lead {
+        font-size: 24px;
+        line-height: 1.25;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+
+
+      /* Customize the navbar links to be fill the entire space of the .navbar */
+      .navbar .navbar-inner {
+        padding: 0;
+      }
+      .navbar .nav {
+        margin: 0;
+        display: table;
+        width: 100%;
+      }
+      .navbar .nav li {
+        display: table-cell;
+        width: 1%;
+        float: none;
+      }
+      .navbar .nav li a {
+        font-weight: bold;
+        text-align: center;
+        border-left: 1px solid rgba(255,255,255,.75);
+        border-right: 1px solid rgba(0,0,0,.1);
+      }
+      .navbar .nav li:first-child a {
+        border-left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .navbar .nav li:last-child a {
+        border-right: 0;
+        border-radius: 0 3px 3px 0;
+      }
+    </style>
+    
+    <link href="{{ asset('bundles/sanostatic/css/bootstrap-responsive.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    
+    <link rel="shortcut icon" href="{{ asset('bundles/sanostatic/images/logo.gif') }}">
+    
+  </head>
+
+  <body>
+      
+    <div class="container">
+        <a href="{{ path('_home') }}">
+           <img id="logo" src="{{ asset('bundles/sanostatic/images/logo.gif') }}" alt="Logo"/>
+        </a>
+        <div id="sidemenu">
+            <a href="{{ path('_home') }}">Login</a><br />
+        </div>
+      <div class="masthead">
+          <ul class="navigation">
+                <li class="active"><a href="{{ path('_home') }}">Domov</a></li>
+                <li><a href="{{ path('_o_meni') }}">O meni</a></li>
+                <li><a href="{{ path('_ponudba') }}">Ponudba</a></li>
+                <li><a href="{{ path('_blog') }}">Blog</a></li>
+                <li><a href="{{ path('_kontakt') }}">Kontakt</a></li>
+          </ul>
+      </div>
+    </div> <!-- /container -->
+
+{% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="flash-message">
+                    <em>Notice</em>: {{ flashMessage }}
+                </div>
+            {% endfor %}
+
+            {% block content_header %}
+                <ul id="menu">
+                    {% block content_header_more %}
+                    {% endblock %}
+                </ul>
+
+                <div style="clear: both"></div>
+            {% endblock %}
+
+            <div class="symfony-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            {% if code is defined %}
+                <h2>Code behind this page</h2>
+                <div class="symfony-content">{{ code|raw }}</div>
+            {% endif %}
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ asset('bundles/sanostatic/js/bootstrap.min.js') }}"></script>
+   
+    <script>
+      !function ($) {
+        $(function(){
+          // carousel demo
+          $('#myCarousel').carousel()
+        })
+      }(window.jQuery)
+    </script>
+    <div id="footer">
+        <div class="container">
+          <hr />
+          <p class="muted credit">Footer text, slika, logo...? 
+              <a href="{{ path('_admin') }}">Admin Toolbar</a>
+          </p>
+        </div>
+    </div>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

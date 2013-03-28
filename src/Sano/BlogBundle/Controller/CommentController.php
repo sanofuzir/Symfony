@@ -25,6 +25,7 @@ class CommentController extends Controller
     {
         return $this->container->get('sano.comment_manager');
     }
+    
     /**
      * @return PostManager
      */
@@ -51,7 +52,6 @@ class CommentController extends Controller
      * @Route("/comment/edit/{id}", name="_editComment")
      * @Template()
      */
-    
     public function CommentEditAction(Request $request, $id)
     {
         $entity = $this->getCommentManager()->findComment($id);            
@@ -81,7 +81,6 @@ class CommentController extends Controller
      * @Route("/comment/add/post/{id}", name="_addComment")
      * @Template()
      */
-    
     public function CommentAddAction(Request $request, $id)
     {
         $comment = $this->getCommentManager()->createComment();
@@ -96,7 +95,7 @@ class CommentController extends Controller
                 $this->getCommentManager()->saveComment($comment);
                 $this->getPostManager()->savePost($post);
                 $dispatcher = new EventDispatcher();
-                $dispatcher->dispatch('sano.news.news_saved', new NewsEvent($entity));
+                $dispatcher->dispatch('sano.news.news_saved', new CommentEvent($comment));
                 
                 $this->get('session')->setFlash('notice', 'Comment was added!');
 
@@ -112,7 +111,6 @@ class CommentController extends Controller
     /**
      * @Route("Comment/delete/{id}", name="_deleteComment", requirements={"id" = "\d{1,4}"}) 
      */
-    
     public function deleteCommentAction($id)
     {
         
@@ -129,7 +127,6 @@ class CommentController extends Controller
      * @Route("Comment/{id}", name="_singleComment")
      * @Template()
      */
-    
     public function singleCommentAction($id)
     {
         $comment = $this->getCommentManager()->findComment($id);
@@ -152,7 +149,6 @@ class CommentController extends Controller
      * @Route("Comment/{year}/{month}", name="_arhiveComment")
      * @Template()
      */
-    
     public function arhiveAction(Request $request, $year=NULL, $month=NULL)
     {        
         $post = $this->getCommentManager()->getArchive($year, $month);
