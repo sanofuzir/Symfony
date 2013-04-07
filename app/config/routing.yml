@@ -1,7 +1,7 @@
 sano_user:
     resource: "@SanoUserBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   /user
 
 sano_admin:
     resource: "@SanoAdminBundle/Controller/"
@@ -25,7 +25,7 @@ sanoNewsBundle:
 SanoStaticBundle:
     resource: "@SanoStaticBundle/Controller/"
     prefix:   /
-
+    
 #Fos User
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

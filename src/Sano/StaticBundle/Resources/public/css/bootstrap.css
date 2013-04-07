@@ -6203,8 +6203,7 @@ a.badge:focus {
     text-decoration: overline;
 }
 #sidemenu {
-    float: right;
-    margin-top: -10px;
+    margin-right: 10px;
 }
 #sidemenu a:link, #sidemenu a:visited {
     text-decoration: none;
@@ -6212,6 +6211,9 @@ a.badge:focus {
 }
 #sidemenu a:hover {
     text-decoration: underline;
+}
+#sidemenu li {
+    list-style-type: none;
 }
 #logo {
     width: 150px;
