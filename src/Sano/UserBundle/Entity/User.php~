@@ -1,0 +1,185 @@
+<?php
+// src/Acme/UserBundle/Entity/User.php
+
+namespace Sano\UserBundle\Entity;
+
+use FOS\UserBundle\Entity\User as BaseUser;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="fos_user")
+ * @ORM\Entity(repositoryClass="Sano\UserBundle\Entity\UserRepository")
+ * @ORM\HasLifecycleCallbacks
+ */
+class User extends BaseUser
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer", nullable=false, unique=true)
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="username", type="string", length=255)
+    * @Assert\NotBlank(message="to polje ne sme biti prazno")
+    * @Assert\MinLength(
+    * limit=6,
+    * message="Your title must have at least {{ limit }} characters!")
+    * @Assert\MaxLength(
+    * limit=50,
+    * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
+    */
+    protected $username;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="password", type="string", length=255)
+    * @Assert\NotBlank(message="to polje ne sme biti prazno")
+    * @Assert\MinLength(
+    * limit=6,
+    * message="Your title must have at least {{ limit }} characters!")
+    * @Assert\MaxLength(
+    * limit=50,
+    * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
+    */
+    protected $password;
+    
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="email", type="string", length=255)
+    * @Assert\Email(
+    * message = "The email '{{ value }}' is not a valid email.",
+    * checkMX = true
+    * )
+    * @Assert\NotBlank(message="to polje ne sme biti prazno")
+    * @Assert\MinLength(
+    * limit=6,
+    * message="Your title must have at least {{ limit }} characters!")
+    * @Assert\MaxLength(
+    * limit=50,
+    * message="Predolgo besedilo, naslov lahko vsebuje do {{ limit }} znakov")
+    */
+    protected $email;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="creation_date", type="datetime")
+     */
+    private $creation_date;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->creation_date = new \DateTime('now');
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     * @return User
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return string 
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set creation_date
+     *
+     * @param \DateTime $creationDate
+     * @return User
+     */
+    public function setCreationDate($creationDate)
+    {
+        $this->creation_date = $creationDate;
+    
+        return $this;
+    }
+
+    /**
+     * Get creation_date
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+        return $this->creation_date;
+    }
+}
